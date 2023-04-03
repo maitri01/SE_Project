@@ -41,6 +41,8 @@ class _NotificationsSettingsWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -59,7 +61,7 @@ class _NotificationsSettingsWidgetState
         ),
         title: Text(
           'Notifications',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).headlineSmall,
         ),
         actions: [],
         centerTitle: false,
@@ -86,7 +88,7 @@ class _NotificationsSettingsWidgetState
                   width: 40.0,
                   height: 40.0,
                   child: SpinKitSquareCircle(
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                     size: 40.0,
                   ),
                 ),
@@ -104,7 +106,7 @@ class _NotificationsSettingsWidgetState
                       Expanded(
                         child: Text(
                           'Choose what notifcations you want to recieve below and we will update the settings.',
-                          style: FlutterFlowTheme.of(context).bodyText2,
+                          style: FlutterFlowTheme.of(context).bodySmall,
                         ),
                       ),
                     ],
@@ -119,15 +121,15 @@ class _NotificationsSettingsWidgetState
                     },
                     title: Text(
                       'Push Notifications',
-                      style: FlutterFlowTheme.of(context).title3,
+                      style: FlutterFlowTheme.of(context).headlineSmall,
                     ),
                     subtitle: Text(
                       'Receive Push notifications from our application on a semi regular basis.',
-                      style: FlutterFlowTheme.of(context).bodyText2,
+                      style: FlutterFlowTheme.of(context).bodySmall,
                     ),
                     tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    activeColor: FlutterFlowTheme.of(context).tertiaryColor,
-                    activeTrackColor: FlutterFlowTheme.of(context).primaryColor,
+                    activeColor: FlutterFlowTheme.of(context).tertiary,
+                    activeTrackColor: FlutterFlowTheme.of(context).primary,
                     dense: false,
                     controlAffinity: ListTileControlAffinity.trailing,
                     contentPadding:
@@ -141,15 +143,15 @@ class _NotificationsSettingsWidgetState
                   },
                   title: Text(
                     'Email Notifications',
-                    style: FlutterFlowTheme.of(context).title3,
+                    style: FlutterFlowTheme.of(context).headlineSmall,
                   ),
                   subtitle: Text(
                     'Receive email notifications from our marketing team about new features.',
-                    style: FlutterFlowTheme.of(context).bodyText2,
+                    style: FlutterFlowTheme.of(context).bodySmall,
                   ),
                   tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  activeColor: FlutterFlowTheme.of(context).tertiaryColor,
-                  activeTrackColor: FlutterFlowTheme.of(context).primaryColor,
+                  activeColor: FlutterFlowTheme.of(context).tertiary,
+                  activeTrackColor: FlutterFlowTheme.of(context).primary,
                   dense: false,
                   controlAffinity: ListTileControlAffinity.trailing,
                   contentPadding:
@@ -162,15 +164,15 @@ class _NotificationsSettingsWidgetState
                   },
                   title: Text(
                     'Location Services',
-                    style: FlutterFlowTheme.of(context).title3,
+                    style: FlutterFlowTheme.of(context).headlineSmall,
                   ),
                   subtitle: Text(
                     'Allow us to track your location, this helps keep track of spending and keeps you safe.',
-                    style: FlutterFlowTheme.of(context).bodyText2,
+                    style: FlutterFlowTheme.of(context).bodySmall,
                   ),
                   tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  activeColor: FlutterFlowTheme.of(context).tertiaryColor,
-                  activeTrackColor: FlutterFlowTheme.of(context).primaryColor,
+                  activeColor: FlutterFlowTheme.of(context).tertiary,
+                  activeTrackColor: FlutterFlowTheme.of(context).primary,
                   dense: false,
                   controlAffinity: ListTileControlAffinity.trailing,
                   contentPadding:
@@ -190,9 +192,9 @@ class _NotificationsSettingsWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryColor,
+                      color: FlutterFlowTheme.of(context).primary,
                       textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
+                          FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Lexend',
                                 color: FlutterFlowTheme.of(context).textColor,
                               ),

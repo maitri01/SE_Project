@@ -28,7 +28,7 @@
             <string>Editor</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>com.googleusercontent.apps.487153437449-9ei9nqc36ogvjjui85rkjaok88cd6u38</string>
+                <string>com.googleusercontent.apps.590481859199-8dbic6ctkjomeoj0lm12oq3jlaoogeol</string>
                 
             </array>
         </dict>
@@ -56,7 +56,7 @@
 	<key>NSCameraUsageDescription</key>
     <string>In order to take a picture or video, this app requires permission to access the camera.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>In order to upload media, this app requires permission to access the photo library.</string>
+    <string>In order to upload data, this app requires permission to access the photo library.</string>
 
 
 

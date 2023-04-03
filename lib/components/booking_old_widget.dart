@@ -54,6 +54,8 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: MediaQuery.of(context).size.width * 1.0,
       height: MediaQuery.of(context).size.height * 1.0,
@@ -72,7 +74,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                   width: 40.0,
                   height: 40.0,
                   child: SpinKitSquareCircle(
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                     size: 40.0,
                   ),
                 ),
@@ -95,7 +97,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                     child: Text(
                       'Book Appointment',
-                      style: FlutterFlowTheme.of(context).title3,
+                      style: FlutterFlowTheme.of(context).headlineSmall,
                     ),
                   ),
                   Row(
@@ -107,7 +109,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                               0.0, 8.0, 0.0, 0.0),
                           child: Text(
                             'Fill out the information below in order to book your appointment with our office.',
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                            style: FlutterFlowTheme.of(context).bodyMedium,
                           ),
                         ),
                       ),
@@ -124,7 +126,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Email Address',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                        labelStyle: FlutterFlowTheme.of(context).bodyMedium,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).background,
@@ -158,9 +160,9 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 0.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                      style: FlutterFlowTheme.of(context).titleSmall.override(
                             fontFamily: 'Lexend',
-                            color: FlutterFlowTheme.of(context).primaryColor,
+                            color: FlutterFlowTheme.of(context).primary,
                             fontWeight: FontWeight.bold,
                           ),
                       keyboardType: TextInputType.emailAddress,
@@ -179,7 +181,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Booking For',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                        labelStyle: FlutterFlowTheme.of(context).bodyMedium,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).background,
@@ -213,7 +215,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 0.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).subtitle2.override(
+                      style: FlutterFlowTheme.of(context).titleSmall.override(
                             fontFamily: 'Lexend',
                             color: FlutterFlowTheme.of(context).textColor,
                             fontWeight: FontWeight.bold,
@@ -239,7 +241,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                       width: MediaQuery.of(context).size.width * 0.9,
                       height: 60.0,
                       textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
+                          FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Lexend',
                                 color: FlutterFlowTheme.of(context).textColor,
                               ),
@@ -256,6 +258,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                       margin:
                           EdgeInsetsDirectional.fromSTEB(20.0, 4.0, 16.0, 4.0),
                       hidesUnderline: true,
+                      isSearchable: false,
                     ),
                   ),
                   Padding(
@@ -266,7 +269,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'What\'s the problem?',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                        labelStyle: FlutterFlowTheme.of(context).bodyMedium,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).background,
@@ -300,7 +303,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 0.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lexend',
                             color: FlutterFlowTheme.of(context).textColor,
                           ),
@@ -365,7 +368,7 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                                       child: Text(
                                         'Choose Date',
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                            .bodyMedium
                                             .override(
                                               fontFamily: 'Lexend',
                                               fontSize: 12.0,
@@ -383,12 +386,12 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                                               .languageCode,
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyText2
+                                            .bodySmall
                                             .override(
                                               fontFamily: 'Lexend',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .tertiaryColor,
+                                                      .tertiary,
                                               fontWeight: FontWeight.w600,
                                             ),
                                       ),
@@ -447,12 +450,13 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).background,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend',
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             elevation: 0.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
@@ -462,21 +466,8 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                           ),
                         ),
                         FFButtonWidget(
-                          onPressed: () async {
-                            final appointmentsCreateData =
-                                createAppointmentsRecordData(
-                              appointmentType: _model.dropDownValue,
-                              appointmentTime: _model.datePicked,
-                              appointmentName:
-                                  _model.personsNameController.text,
-                              appointmentDescription:
-                                  _model.problemDescriptionController.text,
-                              appointmentEmail: currentUserEmail,
-                            );
-                            await AppointmentsRecord.collection
-                                .doc()
-                                .set(appointmentsCreateData);
-                            context.pop();
+                          onPressed: () {
+                            print('Button pressed ...');
                           },
                           text: 'Book Now',
                           options: FFButtonOptions(
@@ -486,13 +477,14 @@ class _BookingOldWidgetState extends State<BookingOldWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            textStyle:
-                                FlutterFlowTheme.of(context).subtitle2.override(
-                                      fontFamily: 'Lexend',
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                             elevation: 3.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,

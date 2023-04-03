@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>487153437449-9ei9nqc36ogvjjui85rkjaok88cd6u38.apps.googleusercontent.com</string>
+	<string>590481859199-8dbic6ctkjomeoj0lm12oq3jlaoogeol.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.487153437449-9ei9nqc36ogvjjui85rkjaok88cd6u38</string>
+	<string>com.googleusercontent.apps.590481859199-8dbic6ctkjomeoj0lm12oq3jlaoogeol</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCAv0sVZB75LAvb-oLA3GbzMotr88bqKZ0</string>
+	<string>AIzaSyCR0oglV-bqmALUWgAcViAgkIZ6fiZ9oAs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>487153437449</string>
+	<string>590481859199</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.flutterflow.seproject</string>
 	<key>PROJECT_ID</key>
-	<string>fir-test-a9c25</string>
+	<string>stock-535b8</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fir-test-a9c25.appspot.com</string>
+	<string>stock-535b8.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:487153437449:ios:688262e3cf09d96179e1d8</string>
+	<string>1:590481859199:ios:505c00787ab8a07c3dd54a</string>
 </dict>
 </plist>

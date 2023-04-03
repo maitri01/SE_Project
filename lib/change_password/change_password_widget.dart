@@ -39,6 +39,8 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -57,7 +59,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         ),
         title: Text(
           'Change Password',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).headlineSmall,
         ),
         actions: [],
         centerTitle: false,
@@ -84,7 +86,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                   width: 40.0,
                   height: 40.0,
                   child: SpinKitSquareCircle(
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: FlutterFlowTheme.of(context).primary,
                     size: 40.0,
                   ),
                 ),
@@ -102,7 +104,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       Expanded(
                         child: Text(
                           '\nEnter the email associated with your account and we will send you link to reset your password.\n',
-                          style: FlutterFlowTheme.of(context).bodyText2,
+                          style: FlutterFlowTheme.of(context).bodySmall,
                         ),
                       ),
                     ],
@@ -119,9 +121,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Email Address',
-                      labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                      labelStyle: FlutterFlowTheme.of(context).bodySmall,
                       hintText: 'Enter your email...',
-                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: FlutterFlowTheme.of(context).alternate,
@@ -156,7 +158,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       contentPadding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 24.0, 20.0, 24.0),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyText1,
+                    style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: _model.emailAddressControllerValidator
                         .asValidator(context),
                   ),
@@ -188,9 +190,9 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryColor,
+                      color: FlutterFlowTheme.of(context).primary,
                       textStyle:
-                          FlutterFlowTheme.of(context).subtitle2.override(
+                          FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Lexend',
                                 color: FlutterFlowTheme.of(context).textColor,
                               ),

@@ -110,6 +110,8 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).background,
@@ -127,11 +129,11 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                   children: [
                     Text(
                       'Wallet Balance',
-                      style: FlutterFlowTheme.of(context).subtitle1,
+                      style: FlutterFlowTheme.of(context).titleMedium,
                     ),
                     Card(
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      color: FlutterFlowTheme.of(context).primaryColor,
+                      color: FlutterFlowTheme.of(context).primary,
                       elevation: 2.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40.0),
@@ -163,7 +165,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                   children: [
                     Text(
                       '\$23,000',
-                      style: FlutterFlowTheme.of(context).title1.override(
+                      style: FlutterFlowTheme.of(context).displaySmall.override(
                             fontFamily: 'Lexend',
                             fontSize: 36.0,
                             fontWeight: FontWeight.w300,
@@ -180,9 +182,9 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                   children: [
                     Text(
                       '3 currencies',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Lexend',
-                            color: FlutterFlowTheme.of(context).tertiaryColor,
+                            color: FlutterFlowTheme.of(context).tertiary,
                           ),
                     ),
                   ],
@@ -246,60 +248,44 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                       child: Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
-                        child: InkWell(
-                          onTap: () async {
-                            context.pushNamed(
-                              'transferFunds',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType:
-                                      PageTransitionType.bottomToTop,
-                                  duration: Duration(milliseconds: 220),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.24,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).darkBackground,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 12.0, 12.0, 12.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 12.0),
+                                  child: Icon(
+                                    Icons.swap_horiz_outlined,
+                                    color:
+                                        FlutterFlowTheme.of(context).textColor,
+                                    size: 36.0,
+                                  ),
                                 ),
-                              },
-                            );
-                          },
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.24,
-                            decoration: BoxDecoration(
-                              color:
-                                  FlutterFlowTheme.of(context).darkBackground,
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 12.0, 12.0, 12.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 12.0),
-                                    child: Icon(
-                                      Icons.swap_horiz_outlined,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 4.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Transfer',
+                                    style: GoogleFonts.getFont(
+                                      'Lexend Deca',
                                       color: FlutterFlowTheme.of(context)
                                           .textColor,
-                                      size: 36.0,
+                                      fontSize: 12.0,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Transfer',
-                                      style: GoogleFonts.getFont(
-                                        'Lexend Deca',
-                                        color: FlutterFlowTheme.of(context)
-                                            .textColor,
-                                        fontSize: 12.0,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -369,7 +355,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                     gradient: LinearGradient(
                       colors: [
                         FlutterFlowTheme.of(context).errorRed,
-                        FlutterFlowTheme.of(context).primaryColor
+                        FlutterFlowTheme.of(context).primary
                       ],
                       stops: [0.0, 1.0],
                       begin: AlignmentDirectional(1.0, -1.0),
@@ -386,7 +372,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                       children: [
                         Text(
                           'Bitcoin',
-                          style: FlutterFlowTheme.of(context).title3,
+                          style: FlutterFlowTheme.of(context).headlineSmall,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
@@ -397,13 +383,14 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                                   0.0, 8.0, 0.0, 0.0),
                               child: Text(
                                 '\$7,302',
-                                style: FlutterFlowTheme.of(context).title1,
+                                style:
+                                    FlutterFlowTheme.of(context).displaySmall,
                               ),
                             ),
                             Text(
                               '32% of portfolio',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Lexend',
                                     color: Color(0x7DEEEEEE),
@@ -428,11 +415,11 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                                 center: Text(
                                   ' ',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend',
                                         color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            .primary,
                                       ),
                                 ),
                                 barRadius: Radius.circular(40.0),
@@ -455,7 +442,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                     gradient: LinearGradient(
                       colors: [
                         Color(0xFF4B39EF),
-                        FlutterFlowTheme.of(context).primaryColor
+                        FlutterFlowTheme.of(context).primary
                       ],
                       stops: [0.0, 1.0],
                       begin: AlignmentDirectional(1.0, -1.0),
@@ -472,7 +459,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                       children: [
                         Text(
                           'Solona',
-                          style: FlutterFlowTheme.of(context).title3,
+                          style: FlutterFlowTheme.of(context).headlineSmall,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
@@ -483,13 +470,14 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                                   0.0, 8.0, 0.0, 0.0),
                               child: Text(
                                 '\$7,302',
-                                style: FlutterFlowTheme.of(context).title1,
+                                style:
+                                    FlutterFlowTheme.of(context).displaySmall,
                               ),
                             ),
                             Text(
                               '40% of portfolio',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Lexend',
                                     color: Color(0x7DEEEEEE),
@@ -514,11 +502,11 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                                 center: Text(
                                   ' ',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend',
                                         color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            .primary,
                                       ),
                                 ),
                                 barRadius: Radius.circular(40.0),
@@ -540,7 +528,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        FlutterFlowTheme.of(context).tertiaryColor,
+                        FlutterFlowTheme.of(context).tertiary,
                         Color(0xFFEE8B60)
                       ],
                       stops: [0.0, 1.0],
@@ -558,7 +546,7 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                       children: [
                         Text(
                           'Dogecoin',
-                          style: FlutterFlowTheme.of(context).title3,
+                          style: FlutterFlowTheme.of(context).headlineSmall,
                         ),
                         Row(
                           mainAxisSize: MainAxisSize.max,
@@ -569,13 +557,14 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                                   0.0, 8.0, 0.0, 0.0),
                               child: Text(
                                 '\$7,302',
-                                style: FlutterFlowTheme.of(context).title1,
+                                style:
+                                    FlutterFlowTheme.of(context).displaySmall,
                               ),
                             ),
                             Text(
                               '40% of portfolio',
                               style: FlutterFlowTheme.of(context)
-                                  .bodyText1
+                                  .bodyMedium
                                   .override(
                                     fontFamily: 'Lexend',
                                     color: Color(0x7DEEEEEE),
@@ -600,11 +589,11 @@ class _ProfilepageWidgetState extends State<ProfilepageWidget>
                                 center: Text(
                                   ' ',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: 'Lexend',
                                         color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                            .primary,
                                       ),
                                 ),
                                 barRadius: Radius.circular(40.0),

@@ -1,3 +1,4 @@
+import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,12 @@ void main() async {
 
   await FlutterFlowTheme.initialize();
 
-  runApp(MyApp());
+  final appState = FFAppState(); // Initialize FFAppState
+
+  runApp(ChangeNotifierProvider(
+    create: (context) => appState,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -126,7 +132,6 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'homePage': HomePageWidget(),
       'MyPortfolio': MyPortfolioWidget(),
-      'MY_Budgets': MYBudgetsWidget(),
       'MY_profilePage': MYProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -140,7 +145,7 @@ class _NavBarPageState extends State<NavBarPage> {
           _currentPageName = tabs.keys.toList()[i];
         }),
         backgroundColor: FlutterFlowTheme.of(context).darkBackground,
-        selectedItemColor: FlutterFlowTheme.of(context).primaryColor,
+        selectedItemColor: FlutterFlowTheme.of(context).primary,
         unselectedItemColor: FlutterFlowTheme.of(context).grayLight,
         selectedBackgroundColor: Color(0x00000000),
         borderRadius: 8.0,
@@ -157,7 +162,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 Icon(
                   currentIndex == 0 ? Icons.home_rounded : Icons.home_outlined,
                   color: currentIndex == 0
-                      ? FlutterFlowTheme.of(context).primaryColor
+                      ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).grayLight,
                   size: 24.0,
                 ),
@@ -166,7 +171,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 0
-                        ? FlutterFlowTheme.of(context).primaryColor
+                        ? FlutterFlowTheme.of(context).primary
                         : FlutterFlowTheme.of(context).grayLight,
                     fontSize: 11.0,
                   ),
@@ -179,20 +184,18 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  currentIndex == 1
-                      ? FontAwesomeIcons.solidCreditCard
-                      : Icons.credit_card,
+                  Icons.credit_card,
                   color: currentIndex == 1
-                      ? FlutterFlowTheme.of(context).primaryColor
+                      ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).grayLight,
                   size: 20.0,
                 ),
                 Text(
-                  '•',
+                  'Portfolio',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
-                        ? FlutterFlowTheme.of(context).primaryColor
+                        ? FlutterFlowTheme.of(context).primary
                         : FlutterFlowTheme.of(context).grayLight,
                     fontSize: 11.0,
                   ),
@@ -206,45 +209,19 @@ class _NavBarPageState extends State<NavBarPage> {
               children: [
                 Icon(
                   currentIndex == 2
-                      ? Icons.stacked_line_chart_rounded
-                      : Icons.stacked_line_chart_rounded,
+                      ? Icons.account_circle_rounded
+                      : Icons.account_circle_outlined,
                   color: currentIndex == 2
-                      ? FlutterFlowTheme.of(context).primaryColor
+                      ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).grayLight,
                   size: 24.0,
                 ),
                 Text(
-                  '•',
+                  'Profile',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2
-                        ? FlutterFlowTheme.of(context).primaryColor
-                        : FlutterFlowTheme.of(context).grayLight,
-                    fontSize: 11.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          FloatingNavbarItem(
-            customWidget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  currentIndex == 3
-                      ? Icons.account_circle_rounded
-                      : Icons.account_circle_outlined,
-                  color: currentIndex == 3
-                      ? FlutterFlowTheme.of(context).primaryColor
-                      : FlutterFlowTheme.of(context).grayLight,
-                  size: 24.0,
-                ),
-                Text(
-                  '•',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: currentIndex == 3
-                        ? FlutterFlowTheme.of(context).primaryColor
+                        ? FlutterFlowTheme.of(context).primary
                         : FlutterFlowTheme.of(context).grayLight,
                     fontSize: 11.0,
                   ),

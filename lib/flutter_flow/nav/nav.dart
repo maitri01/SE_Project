@@ -89,23 +89,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => LoginPageWidget(),
             ),
             FFRoute(
-              name: 'forgotPassword',
-              path: 'forgotPassword',
-              builder: (context, params) => ForgotPasswordWidget(),
-            ),
-            FFRoute(
-              name: 'homePage',
-              path: 'homePage',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'homePage')
-                  : HomePageWidget(),
-            ),
-            FFRoute(
               name: 'completeProfile',
               path: 'completeProfile',
-              builder: (context, params) => NavBarPage(
-                initialPage: '',
-                page: CompleteProfileWidget(),
+              builder: (context, params) => CompleteProfileWidget(),
+            ),
+            FFRoute(
+              name: 'forgotPassword',
+              path: 'forgotPassword',
+              builder: (context, params) => ForgotPasswordWidget(
+                email: params.getParam('email', ParamType.String),
               ),
             ),
             FFRoute(
@@ -119,36 +111,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
+              name: 'Search_Stocks',
+              path: 'searchStocks',
+              builder: (context, params) => NavBarPage(
+                initialPage: '',
+                page: SearchStocksWidget(
+                  checked: params.getParam('checked', ParamType.bool),
+                  stocklist: params.getParam<String>(
+                      'stocklist', ParamType.String, true),
+                ),
+              ),
+            ),
+            FFRoute(
+              name: 'homePage',
+              path: 'homePage',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'homePage')
+                  : HomePageWidget(
+                      niftyprice:
+                          params.getParam('niftyprice', ParamType.double),
+                      watchlistcondition:
+                          params.getParam('watchlistcondition', ParamType.bool),
+                    ),
+            ),
+            FFRoute(
               name: 'MyPortfolio',
               path: 'myPortfolio',
               builder: (context, params) => params.isEmpty
                   ? NavBarPage(initialPage: 'MyPortfolio')
-                  : MyPortfolioWidget(),
-            ),
-            FFRoute(
-              name: 'MY_Budgets',
-              path: 'mYBudgets',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'MY_Budgets')
-                  : MYBudgetsWidget(),
-            ),
-            FFRoute(
-              name: 'budgetDetails',
-              path: 'budgetDetails',
-              builder: (context, params) => BudgetDetailsWidget(
-                budgetDetails: params.getParam('budgetDetails',
-                    ParamType.DocumentReference, false, ['budgets']),
-              ),
-            ),
-            FFRoute(
-              name: 'transferFunds',
-              path: 'transferFunds',
-              builder: (context, params) => TransferFundsWidget(),
-            ),
-            FFRoute(
-              name: 'createBudget',
-              path: 'createBudget',
-              builder: (context, params) => CreateBudgetWidget(),
+                  : NavBarPage(
+                      initialPage: 'MyPortfolio',
+                      page: MyPortfolioWidget(
+                        profit: params.getParam('profit', ParamType.double),
+                        loss: params.getParam('loss', ParamType.double),
+                      ),
+                    ),
             ),
             FFRoute(
               name: 'changePassword',
@@ -177,19 +175,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
-              name: 'homePage_alt',
-              path: 'homePageAlt',
-              builder: (context, params) => HomePageAltWidget(),
-            ),
-            FFRoute(
-              name: 'homePage_alt_1',
-              path: 'homePageAlt1',
-              builder: (context, params) => HomePageAlt1Widget(),
-            ),
-            FFRoute(
               name: 'profilepage',
               path: 'profilepage',
               builder: (context, params) => ProfilepageWidget(),
+            ),
+            FFRoute(
+              name: 'Charts',
+              path: 'charts',
+              builder: (context, params) => NavBarPage(
+                initialPage: '',
+                page: ChartsWidget(),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

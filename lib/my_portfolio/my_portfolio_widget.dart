@@ -1,6 +1,3 @@
-import '/auth/auth_util.dart';
-import '/backend/backend.dart';
-import '/components/pause_card_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -16,7 +13,14 @@ import 'my_portfolio_model.dart';
 export 'my_portfolio_model.dart';
 
 class MyPortfolioWidget extends StatefulWidget {
-  const MyPortfolioWidget({Key? key}) : super(key: key);
+  const MyPortfolioWidget({
+    Key? key,
+    this.profit,
+    this.loss,
+  }) : super(key: key);
+
+  final double? profit;
+  final double? loss;
 
   @override
   _MyPortfolioWidgetState createState() => _MyPortfolioWidgetState();
@@ -159,32 +163,13 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          context.pushNamed(
-            'homePage',
-            extra: <String, dynamic>{
-              kTransitionInfoKey: TransitionInfo(
-                hasTransition: true,
-                transitionType: PageTransitionType.bottomToTop,
-                duration: Duration(milliseconds: 220),
-              ),
-            },
-          );
-        },
-        backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
-        elevation: 8.0,
-        child: Icon(
-          Icons.add_rounded,
-          color: FlutterFlowTheme.of(context).textColor,
-          size: 36.0,
-        ),
-      ),
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -202,285 +187,273 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
         ),
         title: Text(
           'My Portfolio',
-          style: FlutterFlowTheme.of(context).title1,
+          style: FlutterFlowTheme.of(context).displaySmall,
         ),
         actions: [],
         centerTitle: false,
         elevation: 2.0,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.92,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 24.0, 20.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  'Balance',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Lexend',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                      ),
-                                ),
-                              ],
-                            ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 20.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.92,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 8.0, 20.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  '\$7,630',
-                                  style: FlutterFlowTheme.of(context)
-                                      .title1
-                                      .override(
-                                        fontFamily: 'Lexend',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        fontSize: 32.0,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                20.0, 12.0, 20.0, 16.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '**** 0149',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Roboto Mono',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                ),
-                                Text(
-                                  '05/25',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Roboto Mono',
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.44,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4.0,
-                            color: Color(0x3F14181B),
-                            offset: Offset(0.0, 3.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 12.0, 12.0, 12.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Income',
-                              textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context).bodyText2,
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 12.0),
-                              child: Text(
-                                '+\$12,402',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context)
-                                    .title1
-                                    .override(
-                                      fontFamily: 'Lexend',
-                                      color: FlutterFlowTheme.of(context)
-                                          .tertiaryColor,
-                                      fontSize: 32.0,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 24.0, 20.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Balance',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                          ),
                                     ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              width: 80.0,
-                              height: 28.0,
-                              decoration: BoxDecoration(
-                                color: Color(0x4D39D2C0),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '4.5% ',
-                                    textAlign: TextAlign.start,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Lexend',
-                                          color: FlutterFlowTheme.of(context)
-                                              .tertiaryColor,
-                                        ),
-                                  ),
-                                  Icon(
-                                    Icons.trending_up_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .tertiaryColor,
-                                    size: 24.0,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation1']!),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.44,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 4.0,
-                            color: Color(0x3F14181B),
-                            offset: Offset(0.0, 3.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            12.0, 12.0, 12.0, 12.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Spending',
-                              textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.of(context).bodyText2,
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 12.0),
-                              child: Text(
-                                '-\$8,392',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context)
-                                    .title1
-                                    .override(
-                                      fontFamily: 'Lexend',
-                                      color:
-                                          FlutterFlowTheme.of(context).errorRed,
-                                      fontSize: 32.0,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 8.0, 20.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Rs. ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 32.0,
+                                          ),
                                     ),
+                                    Text(
+                                      '',
+                                      style: FlutterFlowTheme.of(context)
+                                          .displaySmall
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                            fontSize: 32.0,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Container(
-                              width: 80.0,
-                              height: 28.0,
-                              decoration: BoxDecoration(
-                                color: Color(0x9AF06A6A),
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '4.5% ',
-                                    textAlign: TextAlign.start,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Lexend',
-                                          color: FlutterFlowTheme.of(context)
-                                              .errorRed,
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 12.0, 20.0, 16.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  220.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            dateTimeFormat(
+                                              'd/M/y',
+                                              getCurrentTimestamp,
+                                              locale:
+                                                  FFLocalizations.of(context)
+                                                      .languageCode,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Roboto Mono',
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                          ),
                                         ),
+                                      ),
+                                    ],
                                   ),
-                                  Icon(
-                                    Icons.trending_up_rounded,
-                                    color:
-                                        FlutterFlowTheme.of(context).errorRed,
-                                    size: 24.0,
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
+                      ],
                     ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation2']!),
-                  ],
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width * 1.0,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(0.0),
-                    bottomRight: Radius.circular(0.0),
-                    topLeft: Radius.circular(16.0),
-                    topRight: Radius.circular(16.0),
+                        animationsMap['rowOnPageLoadAnimation']!),
                   ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.44,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x3F14181B),
+                              offset: Offset(0.0, 3.0),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                        alignment:
+                            AlignmentDirectional(-0.050000000000000044, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 12.0, 12.0, 12.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Profit',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).bodySmall,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 12.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    formatNumber(
+                                      widget.profit,
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.periodDecimal,
+                                      currency: 'Rs. ',
+                                    ),
+                                    '-',
+                                  ),
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .override(
+                                        fontFamily: 'Lexend',
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                        fontSize: 20.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation1']!),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.44,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 4.0,
+                              color: Color(0x3F14181B),
+                              offset: Offset(0.0, 3.0),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(0.0),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              12.0, 12.0, 12.0, 12.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Loss',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).bodySmall,
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 8.0, 0.0, 12.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    formatNumber(
+                                      widget.loss,
+                                      formatType: FormatType.decimal,
+                                      decimalType: DecimalType.periodDecimal,
+                                      currency: 'Rs. ',
+                                    ),
+                                    '-',
+                                  ),
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .displaySmall
+                                      .override(
+                                        fontFamily: 'Lexend',
+                                        color: FlutterFlowTheme.of(context)
+                                            .errorRed,
+                                        fontSize: 20.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation2']!),
+                    ],
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 1.0,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        borderRadius: BorderRadius.circular(0.0),
+                      ),
+                    ).animateOnPageLoad(
+                        animationsMap['containerOnPageLoadAnimation3']!),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Padding(
                       padding:
@@ -490,7 +463,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                         children: [
                           Text(
                             'Quick Service',
-                            style: FlutterFlowTheme.of(context).bodyText2,
+                            style: FlutterFlowTheme.of(context).bodySmall,
                           ),
                         ],
                       ),
@@ -508,43 +481,28 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(0.0),
                             ),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed(
-                                  'transferFunds',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType:
-                                          PageTransitionType.bottomToTop,
-                                      duration: Duration(milliseconds: 220),
-                                    ),
-                                  },
-                                );
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.swap_horiz_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 40.0,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.swap_horiz_rounded,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 40.0,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 8.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Transfer',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 8.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Transfer',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                           Container(
@@ -553,124 +511,38 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
                                   .primaryBackground,
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(0.0),
                             ),
-                            child: InkWell(
-                              onTap: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  context: context,
-                                  builder: (context) {
-                                    return Padding(
-                                      padding:
-                                          MediaQuery.of(context).viewInsets,
-                                      child: Container(
-                                        height: 220.0,
-                                        child: PauseCardWidget(),
-                                      ),
-                                    );
-                                  },
-                                ).then((value) => setState(() {}));
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.pause_rounded,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 40.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 8.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Pause Card',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          20.0, 12.0, 20.0, 12.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Transaction',
-                            style: FlutterFlowTheme.of(context).bodyText2,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
-                      child: StreamBuilder<List<TransactionsRecord>>(
-                        stream: queryTransactionsRecord(
-                          queryBuilder: (transactionsRecord) =>
-                              transactionsRecord
-                                  .where('user',
-                                      isEqualTo: currentUserReference)
-                                  .orderBy('transactionTime', descending: true),
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 40.0,
-                                height: 40.0,
-                                child: SpinKitSquareCircle(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.pause_rounded,
                                   color:
-                                      FlutterFlowTheme.of(context).primaryColor,
+                                      FlutterFlowTheme.of(context).primaryText,
                                   size: 40.0,
                                 ),
-                              ),
-                            );
-                          }
-                          List<TransactionsRecord>
-                              transactionListTransactionsRecordList =
-                              snapshot.data!;
-                          if (transactionListTransactionsRecordList.isEmpty) {
-                            return Center(
-                              child: Image.asset(
-                                'assets/images/noTransactions.png',
-                                width: 230.0,
-                                height: 300.0,
-                                fit: BoxFit.fitWidth,
-                              ),
-                            );
-                          }
-                          return Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: List.generate(
-                                transactionListTransactionsRecordList.length,
-                                (transactionListIndex) {
-                              final transactionListTransactionsRecord =
-                                  transactionListTransactionsRecordList[
-                                      transactionListIndex];
-                              return Container(
-                                  width: 100, height: 100, color: Colors.green);
-                            }),
-                          );
-                        },
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 8.0, 0.0, 0.0),
+                                  child: Text(
+                                    'Pause Card',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyMedium,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ).animateOnPageLoad(
-                  animationsMap['containerOnPageLoadAnimation3']!),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );

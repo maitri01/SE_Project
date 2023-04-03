@@ -6,7 +6,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -242,11 +242,13 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+        backgroundColor: FlutterFlowTheme.of(context).primary,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -264,7 +266,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
         ),
         title: Text(
           'Complete Profile',
-          style: FlutterFlowTheme.of(context).title3,
+          style: FlutterFlowTheme.of(context).headlineSmall,
         ),
         actions: [],
         centerTitle: false,
@@ -304,7 +306,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       if (selectedMedia != null &&
                           selectedMedia.every((m) =>
                               validateFileFormat(m.storagePath, context))) {
-                        setState(() => _model.isMediaUploading = true);
+                        setState(() => _model.isDataUploading = true);
                         var selectedUploadedFiles = <FFUploadedFile>[];
                         var downloadUrls = <String>[];
                         try {
@@ -333,7 +335,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                               .toList();
                         } finally {
                           ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          _model.isMediaUploading = false;
+                          _model.isDataUploading = false;
                         }
                         if (selectedUploadedFiles.length ==
                                 selectedMedia.length &&
@@ -346,7 +348,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           showUploadMessage(context, 'Success!');
                         } else {
                           setState(() {});
-                          showUploadMessage(context, 'Failed to upload media');
+                          showUploadMessage(context, 'Failed to upload data');
                           return;
                         }
                       }
@@ -370,7 +372,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                 ),
                 Text(
                   'Upload a photo for us to easily identify you.',
-                  style: FlutterFlowTheme.of(context).bodyText1,
+                  style: FlutterFlowTheme.of(context).bodyMedium,
                 ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation']!),
                 Padding(
                   padding:
@@ -380,8 +382,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your Name',
-                      labelStyle: FlutterFlowTheme.of(context).bodyText2,
-                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                      labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
@@ -416,7 +418,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       contentPadding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 24.0, 20.0, 24.0),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyText1,
+                    style: FlutterFlowTheme.of(context).bodyMedium,
                     validator:
                         _model.yourNameControllerValidator.asValidator(context),
                   ).animateOnPageLoad(
@@ -430,9 +432,9 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your Age',
-                      labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                      labelStyle: FlutterFlowTheme.of(context).bodySmall,
                       hintText: 'i.e. 34',
-                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
@@ -467,7 +469,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       contentPadding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 24.0, 20.0, 24.0),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyText1,
+                    style: FlutterFlowTheme.of(context).bodyMedium,
                     keyboardType: TextInputType.number,
                     validator:
                         _model.yourAgeControllerValidator.asValidator(context),
@@ -482,9 +484,9 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your Nationality',
-                      labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                      labelStyle: FlutterFlowTheme.of(context).bodySmall,
                       hintText: 'Indian/ American',
-                      hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                      hintStyle: FlutterFlowTheme.of(context).bodySmall,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0x00000000),
@@ -519,7 +521,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       contentPadding: EdgeInsetsDirectional.fromSTEB(
                           20.0, 24.0, 20.0, 24.0),
                     ),
-                    style: FlutterFlowTheme.of(context).bodyText1,
+                    style: FlutterFlowTheme.of(context).bodyMedium,
                     validator: _model.nationalityControllerValidator
                         .asValidator(context),
                   ).animateOnPageLoad(
@@ -537,7 +539,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                             width: 40.0,
                             height: 40.0,
                             child: SpinKitSquareCircle(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                               size: 40.0,
                             ),
                           ),
@@ -565,9 +567,9 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .titleSmall
                               .override(
                                 fontFamily: 'Lexend',
                                 color: FlutterFlowTheme.of(context).textColor,
@@ -596,7 +598,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                             width: 40.0,
                             height: 40.0,
                             child: SpinKitSquareCircle(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                               size: 40.0,
                             ),
                           ),
@@ -618,7 +620,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           color:
                               FlutterFlowTheme.of(context).secondaryBackground,
                           textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .titleSmall
                               .override(
                                 fontFamily: 'Lexend',
                                 color: FlutterFlowTheme.of(context).primaryText,

@@ -4,7 +4,7 @@ import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -47,6 +47,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return StreamBuilder<UsersRecord>(
       stream: UsersRecord.getDocument(currentUserReference!),
       builder: (context, snapshot) {
@@ -57,7 +59,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               width: 40.0,
               height: 40.0,
               child: SpinKitSquareCircle(
-                color: FlutterFlowTheme.of(context).primaryColor,
+                color: FlutterFlowTheme.of(context).primary,
                 size: 40.0,
               ),
             ),
@@ -72,7 +74,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             automaticallyImplyLeading: false,
             leading: InkWell(
               onTap: () async {
-                context.pop();
+                context.safePop();
               },
               child: Icon(
                 Icons.chevron_left_rounded,
@@ -82,7 +84,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             ),
             title: Text(
               'Edit Profile',
-              style: FlutterFlowTheme.of(context).title3,
+              style: FlutterFlowTheme.of(context).headlineSmall,
             ),
             actions: [],
             centerTitle: false,
@@ -137,7 +139,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         if (selectedMedia != null &&
                             selectedMedia.every((m) =>
                                 validateFileFormat(m.storagePath, context))) {
-                          setState(() => _model.isMediaUploading = true);
+                          setState(() => _model.isDataUploading = true);
                           var selectedUploadedFiles = <FFUploadedFile>[];
                           var downloadUrls = <String>[];
                           try {
@@ -166,7 +168,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 .toList();
                           } finally {
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            _model.isMediaUploading = false;
+                            _model.isDataUploading = false;
                           }
                           if (selectedUploadedFiles.length ==
                                   selectedMedia.length &&
@@ -179,8 +181,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             showUploadMessage(context, 'Success!');
                           } else {
                             setState(() {});
-                            showUploadMessage(
-                                context, 'Failed to upload media');
+                            showUploadMessage(context, 'Failed to upload data');
                             return;
                           }
                         }
@@ -194,7 +195,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        textStyle: FlutterFlowTheme.of(context).bodyText2,
+                        textStyle: FlutterFlowTheme.of(context).bodySmall,
                         elevation: 0.0,
                         borderSide: BorderSide(
                           color: FlutterFlowTheme.of(context).alternate,
@@ -215,9 +216,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Name',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                        labelStyle: FlutterFlowTheme.of(context).bodySmall,
                         hintText: 'Please enter a valid number...',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).alternate,
@@ -252,7 +253,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 20.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                       validator: _model.yourNameControllerValidator
                           .asValidator(context),
                     ),
@@ -268,9 +269,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Email Address',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                        labelStyle: FlutterFlowTheme.of(context).bodySmall,
                         hintText: 'Your email',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).alternate,
@@ -305,7 +306,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 20.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                       keyboardType: TextInputType.emailAddress,
                       validator: _model.yourEmailControllerValidator
                           .asValidator(context),
@@ -322,9 +323,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Age',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText2,
+                        labelStyle: FlutterFlowTheme.of(context).bodySmall,
                         hintText: 'i.e. 34',
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).alternate,
@@ -359,7 +360,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 20.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                       keyboardType: TextInputType.number,
                       validator: _model.yourAgeControllerValidator
                           .asValidator(context),
@@ -376,8 +377,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Title',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText2,
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                        labelStyle: FlutterFlowTheme.of(context).bodySmall,
+                        hintStyle: FlutterFlowTheme.of(context).bodySmall,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: FlutterFlowTheme.of(context).alternate,
@@ -412,7 +413,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         contentPadding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 24.0, 20.0, 24.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                       validator: _model.yourTitleControllerValidator
                           .asValidator(context),
                     ),
@@ -444,9 +445,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primaryColor,
+                        color: FlutterFlowTheme.of(context).primary,
                         textStyle:
-                            FlutterFlowTheme.of(context).subtitle2.override(
+                            FlutterFlowTheme.of(context).titleSmall.override(
                                   fontFamily: 'Lexend',
                                   color: FlutterFlowTheme.of(context).textColor,
                                 ),

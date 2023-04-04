@@ -131,7 +131,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'homePage': HomePageWidget(),
-      'MyPortfolio': MyPortfolioWidget(),
+      'Search_Stocks': SearchStocksWidget(),
+      'PortfolioForm': PortfolioFormWidget(),
       'MY_profilePage': MYProfilePageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -184,14 +185,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.credit_card,
+                  currentIndex == 1 ? Icons.search : Icons.search,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).grayLight,
-                  size: 20.0,
+                  size: 22.0,
                 ),
                 Text(
-                  'Portfolio',
+                  'Search',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
@@ -208,10 +209,34 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  currentIndex == 2
+                  Icons.credit_card,
+                  color: currentIndex == 2
+                      ? FlutterFlowTheme.of(context).primary
+                      : FlutterFlowTheme.of(context).grayLight,
+                  size: 20.0,
+                ),
+                Text(
+                  'Portfolio',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: currentIndex == 2
+                        ? FlutterFlowTheme.of(context).primary
+                        : FlutterFlowTheme.of(context).grayLight,
+                    fontSize: 11.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          FloatingNavbarItem(
+            customWidget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  currentIndex == 3
                       ? Icons.account_circle_rounded
                       : Icons.account_circle_outlined,
-                  color: currentIndex == 2
+                  color: currentIndex == 3
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).grayLight,
                   size: 24.0,
@@ -220,7 +245,7 @@ class _NavBarPageState extends State<NavBarPage> {
                   'Profile',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    color: currentIndex == 2
+                    color: currentIndex == 3
                         ? FlutterFlowTheme.of(context).primary
                         : FlutterFlowTheme.of(context).grayLight,
                     fontSize: 11.0,

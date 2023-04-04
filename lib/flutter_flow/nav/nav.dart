@@ -113,14 +113,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'Search_Stocks',
               path: 'searchStocks',
-              builder: (context, params) => NavBarPage(
-                initialPage: '',
-                page: SearchStocksWidget(
-                  checked: params.getParam('checked', ParamType.bool),
-                  stocklist: params.getParam<String>(
-                      'stocklist', ParamType.String, true),
-                ),
-              ),
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Search_Stocks')
+                  : SearchStocksWidget(
+                      checked: params.getParam('checked', ParamType.bool),
+                      stocklist: params.getParam<String>(
+                          'stocklist', ParamType.String, true),
+                    ),
             ),
             FFRoute(
               name: 'homePage',
@@ -133,20 +132,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                           params.getParam('niftyprice', ParamType.double),
                       watchlistcondition:
                           params.getParam('watchlistcondition', ParamType.bool),
+                      lastwatchlistprice: params.getParam(
+                          'lastwatchlistprice', ParamType.double),
+                      firstwatchlistprice: params.getParam(
+                          'firstwatchlistprice', ParamType.double),
                     ),
             ),
             FFRoute(
               name: 'MyPortfolio',
               path: 'myPortfolio',
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'MyPortfolio')
-                  : NavBarPage(
-                      initialPage: 'MyPortfolio',
-                      page: MyPortfolioWidget(
-                        profit: params.getParam('profit', ParamType.double),
-                        loss: params.getParam('loss', ParamType.double),
-                      ),
-                    ),
+              builder: (context, params) => NavBarPage(
+                initialPage: '',
+                page: MyPortfolioWidget(
+                  profit: params.getParam('profit', ParamType.double),
+                  loss: params.getParam('loss', ParamType.double),
+                  bdate: params.getParam('bdate', ParamType.String),
+                  fname: params.getParam('fname', ParamType.String),
+                  uname: params.getParam('uname', ParamType.String),
+                  boid: params.getParam('boid', ParamType.int),
+                  so: params.getParam('so', ParamType.int),
+                ),
+              ),
             ),
             FFRoute(
               name: 'changePassword',
@@ -175,17 +181,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
-              name: 'profilepage',
-              path: 'profilepage',
-              builder: (context, params) => ProfilepageWidget(),
+              name: 'Charts2',
+              path: 'charts2',
+              builder: (context, params) => Charts2Widget(),
             ),
             FFRoute(
               name: 'Charts',
               path: 'charts',
-              builder: (context, params) => NavBarPage(
-                initialPage: '',
-                page: ChartsWidget(),
-              ),
+              builder: (context, params) => ChartsWidget(),
+            ),
+            FFRoute(
+              name: 'PortfolioForm',
+              path: 'portfolioForm',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'PortfolioForm')
+                  : PortfolioFormWidget(
+                      boid: params.getParam('boid', ParamType.double),
+                      name: params.getParam('name', ParamType.String),
+                      username: params.getParam('username', ParamType.String),
+                      phone: params.getParam('phone', ParamType.int),
+                      birthdate: params.getParam('birthdate', ParamType.String),
+                      ownstock: params.getParam('ownstock', ParamType.int),
+                      ownbond: params.getParam('ownbond', ParamType.int),
+                      pamount: params.getParam('pamount', ParamType.double),
+                      lamount: params.getParam('lamount', ParamType.double),
+                    ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

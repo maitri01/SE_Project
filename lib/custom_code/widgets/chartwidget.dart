@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
+import '/custom_code/actions/index.dart'; // Imports custom actions
 import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
@@ -23,13 +24,11 @@ class Chartwidget extends StatefulWidget {
     Key? key,
     this.width,
     this.height,
-    this.title,
     // required this.search,
   }) : super(key: key);
 
   final double? width;
   final double? height;
-  final String? title;
   // final String search;
 
   @override
@@ -114,7 +113,7 @@ class _ChartwidgetState extends State<Chartwidget> {
         Stack(children: <Widget>[
           Container(
             height: 450,
-            width: 390,
+            width: double.infinity,
             child: KChartWidget(
               datas,
               chartStyle,
@@ -287,7 +286,7 @@ class _ChartwidgetState extends State<Chartwidget> {
       'useQueryString': 'true'
     };
     // String searchtextt = search;
-    var searchtextt = 'AMZN';
+    var searchtextt = 'GOOG';
     var request = http.Request(
         'GET',
         Uri.parse(

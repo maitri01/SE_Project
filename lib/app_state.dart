@@ -61,6 +61,36 @@ class FFAppState extends ChangeNotifier {
   set ifsearchtextnull(bool _value) {
     _ifsearchtextnull = _value;
   }
+
+  List<String> _watchlistt = [];
+  List<String> get watchlistt => _watchlistt;
+  set watchlistt(List<String> _value) {
+    _watchlistt = _value;
+  }
+
+  void addToWatchlistt(String _value) {
+    _watchlistt.add(_value);
+  }
+
+  void removeFromWatchlistt(String _value) {
+    _watchlistt.remove(_value);
+  }
+
+  void removeAtIndexFromWatchlistt(int _index) {
+    _watchlistt.removeAt(_index);
+  }
+
+  String _lastwatchlistprice = '';
+  String get lastwatchlistprice => _lastwatchlistprice;
+  set lastwatchlistprice(String _value) {
+    _lastwatchlistprice = _value;
+  }
+
+  String _firstwatchlistprice = '';
+  String get firstwatchlistprice => _firstwatchlistprice;
+  set firstwatchlistprice(String _value) {
+    _firstwatchlistprice = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

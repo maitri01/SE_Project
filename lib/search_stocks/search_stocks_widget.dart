@@ -78,7 +78,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
             size: 30.0,
           ),
           onPressed: () async {
-            context.pop();
+            context.safePop();
           },
         ),
         title: Text(
@@ -298,6 +298,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                         setState(() {
                           FFAppState().ifsearchtextnull = true;
                         });
+                        FFAppState().addToWatchlistt(FFAppState().searchtext);
                         _model.nasdaqapiResul = await NasdaqStocksCall.call(
                           name: FFAppState().searchtext,
                         );
@@ -611,7 +612,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                             child: CheckboxListTile(
                                               value: _model
                                                       .checkboxListTileValue ??=
-                                                  false,
+                                                  true,
                                               onChanged: (newValue) async {
                                                 setState(() => _model
                                                         .checkboxListTileValue =

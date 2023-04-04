@@ -15,5 +15,6 @@ export '/edit_profile/edit_profile_widget.dart' show EditProfileWidget;
 export '/notifications_settings/notifications_settings_widget.dart'
     show NotificationsSettingsWidget;
 export '/privacy_policy/privacy_policy_widget.dart' show PrivacyPolicyWidget;
-export '/profilepage/profilepage_widget.dart' show ProfilepageWidget;
+export '/charts2/charts2_widget.dart' show Charts2Widget;
 export '/charts/charts_widget.dart' show ChartsWidget;
+export '/portfolio_form/portfolio_form_widget.dart' show PortfolioFormWidget;

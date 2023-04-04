@@ -181,6 +181,41 @@ class AlphaVantageCall {
   }
 }
 
+class RsiCall {
+  static Future<ApiCallResponse> call({
+    String? name = 'AAPL',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'RSI',
+      apiUrl: 'https://alpha-vantage.p.rapidapi.com/query',
+      callType: ApiCallType.GET,
+      headers: {
+        'X-RapidAPI-Key': 'f40ef21d0bmsh98428bce74b479ep12f80bjsn3b9d2aa1a891',
+        'X-RapidAPI-Host': 'alpha-vantage.p.rapidapi.com',
+        'useQueryString': 'true',
+      },
+      params: {
+        'interval': "15min",
+        'symbol': name,
+        'datatype': "json",
+        'series_type': "close",
+        'time_period': "200",
+        'function': "RSI",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic rsi(dynamic response) => getJsonField(
+        response,
+        r'''$..['RSI']''',
+        true,
+      );
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -159,7 +159,7 @@ class _ChartwidgetState extends State<Chartwidget> {
 
   Widget buildButtons() {
     return Wrap(
-      alignment: WrapAlignment.spaceEvenly,
+      alignment: WrapAlignment.center,
       children: <Widget>[
         button("Time Mode", onPressed: () => isLine = true),
         button("K Line Mode", onPressed: () => isLine = false),

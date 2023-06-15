@@ -100,6 +100,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
         elevation: 2.0,
       ),
       body: SafeArea(
+        top: true,
         child: Container(
           width: double.infinity,
           child: Form(
@@ -341,7 +342,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                         context: context,
                         initialDate: getCurrentTimestamp,
                         firstDate: DateTime(1900),
-                        lastDate: DateTime(2050),
+                        lastDate: getCurrentTimestamp,
                       );
 
                       if (_datePickedDate != null) {
@@ -557,7 +558,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
 
                     context.pushNamed(
                       'MyPortfolio',
-                      queryParams: {
+                      queryParameters: {
                         'profit': serializeParam(
                           _model.sap,
                           ParamType.double,

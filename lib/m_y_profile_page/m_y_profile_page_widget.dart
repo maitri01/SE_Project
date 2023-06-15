@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -53,13 +53,16 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 40.0,
-              height: 40.0,
-              child: SpinKitSquareCircle(
-                color: FlutterFlowTheme.of(context).primary,
-                size: 40.0,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 40.0,
+                height: 40.0,
+                child: SpinKitSquareCircle(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 40.0,
+                ),
               ),
             ),
           );
@@ -186,12 +189,12 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                                           onPressed: () async {
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
-                                            await signOut();
+                                            await authManager.signOut();
                                             GoRouter.of(context)
                                                 .clearRedirectLocation();
 
                                             context.goNamedAuth(
-                                                'loginPage', mounted);
+                                                'loginPage', context.mounted);
                                           },
                                         ),
                                       ),
@@ -248,7 +251,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   4.0, 8.0, 0.0, 0.0),
                               child: Text(
-                                mYProfilePageUsersRecord.email!,
+                                mYProfilePageUsersRecord.email,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -288,10 +291,14 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pushNamed(
                           'editProfile',
-                          queryParams: {
+                          queryParameters: {
                             'userProfile': serializeParam(
                               mYProfilePageUsersRecord.reference,
                               ParamType.DocumentReference,
@@ -357,6 +364,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           context.pushNamed('changePassword');
                         },
@@ -420,6 +431,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           context.pushNamed('notificationsSettings');
                         },
@@ -483,6 +498,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           context.pushNamed('MY_profilePage');
                         },
@@ -546,6 +565,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           context.pushNamed('privacyPolicy');
                         },

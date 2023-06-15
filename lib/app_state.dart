@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'backend/backend.dart';
+import '/backend/backend.dart';
 import 'backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
@@ -11,20 +11,14 @@ class FFAppState extends ChangeNotifier {
     return _instance;
   }
 
-  FFAppState._internal() {
-    initializePersistedState();
-  }
+  FFAppState._internal();
 
-  Future initializePersistedState() async {
-    prefs = await SharedPreferences.getInstance();
-  }
+  Future initializePersistedState() async {}
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
-
-  late SharedPreferences prefs;
 
   String _searchtext = '';
   String get searchtext => _searchtext;
@@ -80,6 +74,13 @@ class FFAppState extends ChangeNotifier {
     _watchlistt.removeAt(_index);
   }
 
+  void updateWatchlisttAtIndex(
+    int _index,
+    String Function(String) updateFn,
+  ) {
+    _watchlistt[_index] = updateFn(_watchlistt[_index]);
+  }
+
   String _lastwatchlistprice = '';
   String get lastwatchlistprice => _lastwatchlistprice;
   set lastwatchlistprice(String _value) {
@@ -101,4 +102,16 @@ LatLng? _latLngFromString(String? val) {
   final lat = double.parse(split.first);
   final lng = double.parse(split.last);
   return LatLng(lat, lng);
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }

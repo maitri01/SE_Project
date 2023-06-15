@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -54,13 +54,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 40.0,
-              height: 40.0,
-              child: SpinKitSquareCircle(
-                color: FlutterFlowTheme.of(context).primary,
-                size: 40.0,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 40.0,
+                height: 40.0,
+                child: SpinKitSquareCircle(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 40.0,
+                ),
               ),
             ),
           );
@@ -73,6 +76,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
             leading: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               onTap: () async {
                 context.safePop();
               },
@@ -154,6 +161,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       bytes: m.bytes,
                                       height: m.dimensions?.height,
                                       width: m.dimensions?.width,
+                                      blurHash: m.blurHash,
                                     ))
                                 .toList();
 
@@ -318,7 +326,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                     child: TextFormField(
                       controller: _model.yourAgeController ??=
                           TextEditingController(
-                        text: editProfileUsersRecord.age?.toString(),
+                        text: editProfileUsersRecord.age.toString(),
                       ),
                       obscureText: false,
                       decoration: InputDecoration(

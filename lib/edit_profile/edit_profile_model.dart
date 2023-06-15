@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -42,6 +42,8 @@ class EditProfileModel extends FlutterFlowModel {
     yourAgeController?.dispose();
     yourTitleController?.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

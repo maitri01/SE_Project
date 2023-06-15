@@ -60,13 +60,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 40.0,
-              height: 40.0,
-              child: SpinKitRipple(
-                color: FlutterFlowTheme.of(context).primary,
-                size: 40.0,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 40.0,
+                height: 40.0,
+                child: SpinKitRipple(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 40.0,
+                ),
               ),
             ),
           );
@@ -158,7 +161,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             4.0, 0.0, 0.0, 0.0),
                                         child: Text(
-                                          homePageUsersRecord!.displayName!,
+                                          homePageUsersRecord!.displayName,
                                           style: FlutterFlowTheme.of(context)
                                               .headlineSmall
                                               .override(

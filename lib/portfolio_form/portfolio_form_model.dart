@@ -112,6 +112,8 @@ class PortfolioFormModel extends FlutterFlowModel {
     textController7?.dispose();
   }
 
+  /// Action blocks are added here.
+
   /// Additional helper methods are added here.
 
 }

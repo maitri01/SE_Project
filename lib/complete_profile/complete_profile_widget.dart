@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -52,8 +52,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.bounceOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -78,8 +78,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.easeInOut,
           delay: 50.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -104,8 +104,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.easeInOut,
           delay: 100.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -130,8 +130,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.easeInOut,
           delay: 200.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -156,8 +156,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.easeInOut,
           delay: 200.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -182,8 +182,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.bounceOut,
           delay: 400.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -208,8 +208,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
           curve: Curves.bounceOut,
           delay: 400.ms,
           duration: 600.ms,
-          begin: 1.0,
-          end: 1.0,
+          begin: Offset(1.0, 1.0),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -293,6 +293,10 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 12.0),
                   child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onTap: () async {
                       final selectedMedia =
                           await selectMediaWithSourceBottomSheet(
@@ -321,6 +325,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                                     bytes: m.bytes,
                                     height: m.dimensions?.height,
                                     width: m.dimensions?.width,
+                                    blurHash: m.blurHash,
                                   ))
                               .toList();
 

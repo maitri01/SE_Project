@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -341,7 +341,8 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                       return;
                                     }
 
-                                    final user = await createAccountWithEmail(
+                                    final user = await authManager
+                                        .createAccountWithEmail(
                                       context,
                                       _model.emailAddressController.text,
                                       _model.passwordCreateController.text,
@@ -351,7 +352,7 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     }
 
                                     context.goNamedAuth(
-                                        'completeProfile', mounted);
+                                        'completeProfile', context.mounted);
                                   },
                                   text: 'Create Account',
                                   options: FFButtonOptions(
@@ -391,6 +392,10 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
                                         onTap: () async {
                                           context.pushNamed(
                                             'loginPage',

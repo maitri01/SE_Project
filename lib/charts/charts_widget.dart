@@ -49,13 +49,16 @@ class _ChartsWidgetState extends State<ChartsWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 40.0,
-              height: 40.0,
-              child: SpinKitSquareCircle(
-                color: FlutterFlowTheme.of(context).primary,
-                size: 40.0,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 40.0,
+                height: 40.0,
+                child: SpinKitSquareCircle(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 40.0,
+                ),
               ),
             ),
           );
@@ -94,6 +97,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
             elevation: 2.0,
           ),
           body: SafeArea(
+            top: true,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [

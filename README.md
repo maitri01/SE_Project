@@ -1,0 +1,1 @@
+Application to help you track your portfolio using graphical visualization and technical indicators. Uses APIs to fetch Realtime data and machine learning concepts. Made on FlutterFlow and can be deployed for IOS, Android as well as Windows and can be used as Web application.

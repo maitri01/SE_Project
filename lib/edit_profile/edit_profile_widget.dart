@@ -98,8 +98,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
             elevation: 0.0,
           ),
           body: Container(
-            width: MediaQuery.of(context).size.width * 1.0,
-            height: MediaQuery.of(context).size.height * 1.0,
+            width: MediaQuery.sizeOf(context).width * 1.0,
+            height: MediaQuery.sizeOf(context).height * 1.0,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.fitWidth,
@@ -148,6 +148,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 validateFileFormat(m.storagePath, context))) {
                           setState(() => _model.isDataUploading = true);
                           var selectedUploadedFiles = <FFUploadedFile>[];
+
                           var downloadUrls = <String>[];
                           try {
                             showUploadMessage(
@@ -431,7 +432,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        final usersUpdateData = createUsersRecordData(
+                        await editProfileUsersRecord.reference
+                            .update(createUsersRecordData(
                           displayName: _model.yourNameController.text,
                           email: _model.yourEmailController.text,
                           age: int.tryParse(_model.yourAgeController.text),
@@ -440,9 +442,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             'Badass Geek',
                           ),
                           photoUrl: _model.uploadedFileUrl,
-                        );
-                        await editProfileUsersRecord.reference
-                            .update(usersUpdateData);
+                        ));
                         context.pop();
                       },
                       text: 'Save Changes',

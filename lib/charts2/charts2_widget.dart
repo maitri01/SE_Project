@@ -110,7 +110,7 @@ class _Charts2WidgetState extends State<Charts2Widget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 1.0,
+                      width: MediaQuery.sizeOf(context).width * 1.0,
                       height: 53.2,
                       decoration: BoxDecoration(
                         boxShadow: [

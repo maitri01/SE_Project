@@ -220,7 +220,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.92,
+                          width: MediaQuery.sizeOf(context).width * 0.92,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
@@ -368,7 +368,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.44,
+                          width: MediaQuery.sizeOf(context).width * 0.44,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -426,7 +426,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                         ).animateOnPageLoad(
                             animationsMap['containerOnPageLoadAnimation1']!),
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.44,
+                          width: MediaQuery.sizeOf(context).width * 0.44,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
@@ -485,7 +485,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 1.0,
+                      width: MediaQuery.sizeOf(context).width * 1.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         borderRadius: BorderRadius.circular(0.0),
@@ -510,7 +510,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                         children: [
                           Expanded(
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.44,
+                              width: MediaQuery.sizeOf(context).width * 0.44,
                               height: 100.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
@@ -561,7 +561,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                         children: [
                           Expanded(
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.44,
+                              width: MediaQuery.sizeOf(context).width * 0.44,
                               height: 100.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)

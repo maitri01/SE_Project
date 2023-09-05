@@ -106,7 +106,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         height: 53.2,
                         decoration: BoxDecoration(
                           boxShadow: [
@@ -195,7 +195,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.982,
+                              width: MediaQuery.sizeOf(context).width * 0.982,
                               height: 292.3,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
@@ -303,7 +303,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                               borderRadius: BorderRadius.circular(8.0),
                             ),
                             child: Container(
-                              width: MediaQuery.of(context).size.width * 0.982,
+                              width: MediaQuery.sizeOf(context).width * 0.982,
                               height: 292.3,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)

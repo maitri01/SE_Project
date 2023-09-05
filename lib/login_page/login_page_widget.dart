@@ -52,8 +52,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 1.0,
-                height: MediaQuery.of(context).size.height * 1.0,
+                width: MediaQuery.sizeOf(context).width * 1.0,
+                height: MediaQuery.sizeOf(context).height * 1.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
@@ -335,7 +335,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       context.pushNamed('registerAccount');
                                     },
                                     child: Container(
-                                      width: MediaQuery.of(context).size.width *
+                                      width: MediaQuery.sizeOf(context).width *
                                           0.8,
                                       height: 44.0,
                                       decoration: BoxDecoration(

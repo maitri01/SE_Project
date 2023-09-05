@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>SeProject</string>
+	<string>TradeApp</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 
@@ -37,10 +37,10 @@
         <key>CFBundleTypeRole</key>
         <string>Editor</string>
         <key>CFBundleURLName</key>
-        <string>seproject.com</string>
+        <string>tradeapp.com</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>seproject</string>
+        <string>tradeapp</string>
         </array>
         </dict>
     </array>

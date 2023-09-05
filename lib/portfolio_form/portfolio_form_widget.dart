@@ -612,7 +612,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
                   child: FlutterFlowWebView(
-                    url: 'https://www.cre8ivedesigner.com/disclaimer',
+                    content: 'https://www.cre8ivedesigner.com/disclaimer',
                     bypass: false,
                     height: 70.0,
                     verticalScroll: true,

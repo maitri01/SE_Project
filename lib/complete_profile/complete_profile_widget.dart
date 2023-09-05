@@ -273,8 +273,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
         elevation: 2.0,
       ),
       body: Container(
-        width: MediaQuery.of(context).size.width * 1.0,
-        height: MediaQuery.of(context).size.height * 1.0,
+        width: MediaQuery.sizeOf(context).width * 1.0,
+        height: MediaQuery.sizeOf(context).height * 1.0,
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.fitWidth,
@@ -312,6 +312,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                               validateFileFormat(m.storagePath, context))) {
                         setState(() => _model.isDataUploading = true);
                         var selectedUploadedFiles = <FFUploadedFile>[];
+
                         var downloadUrls = <String>[];
                         try {
                           showUploadMessage(
@@ -553,14 +554,13 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       final buttonLoginUsersRecord = snapshot.data!;
                       return FFButtonWidget(
                         onPressed: () async {
-                          final usersUpdateData = createUsersRecordData(
+                          await buttonLoginUsersRecord.reference
+                              .update(createUsersRecordData(
                             displayName: _model.yourNameController.text,
                             age: int.tryParse(_model.yourAgeController.text),
                             userTitle: _model.nationalityController.text,
                             photoUrl: '',
-                          );
-                          await buttonLoginUsersRecord.reference
-                              .update(usersUpdateData);
+                          ));
 
                           context.pushNamed('homePage');
                         },

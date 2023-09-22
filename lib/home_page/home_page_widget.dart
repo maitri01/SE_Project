@@ -200,7 +200,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        alignment: AlignmentDirectional(-1.00, 0.00),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10.0),
                           child: Image.asset(

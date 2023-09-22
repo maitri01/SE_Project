@@ -5,13 +5,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
-  static final FFAppState _instance = FFAppState._internal();
+  static FFAppState _instance = FFAppState._internal();
 
   factory FFAppState() {
     return _instance;
   }
 
   FFAppState._internal();
+
+  static void reset() {
+    _instance = FFAppState._internal();
+  }
 
   Future initializePersistedState() async {}
 
@@ -79,6 +83,10 @@ class FFAppState extends ChangeNotifier {
     String Function(String) updateFn,
   ) {
     _watchlistt[_index] = updateFn(_watchlistt[_index]);
+  }
+
+  void insertAtIndexInWatchlistt(int _index, String _value) {
+    _watchlistt.insert(_index, _value);
   }
 
   String _lastwatchlistprice = '';

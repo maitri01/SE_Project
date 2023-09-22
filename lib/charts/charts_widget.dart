@@ -417,8 +417,8 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                                             ),
                                           ),
                                           Align(
-                                            alignment:
-                                                AlignmentDirectional(1.0, 1.0),
+                                            alignment: AlignmentDirectional(
+                                                1.00, 1.00),
                                             child: FlutterFlowChartLegendWidget(
                                               entries: [
                                                 LegendEntry(

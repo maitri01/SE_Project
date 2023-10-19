@@ -62,7 +62,7 @@ class _Charts2WidgetState extends State<Charts2Widget> {
               child: SizedBox(
                 width: 40.0,
                 height: 40.0,
-                child: SpinKitSquareCircle(
+                child: SpinKitRipple(
                   color: FlutterFlowTheme.of(context).primary,
                   size: 40.0,
                 ),

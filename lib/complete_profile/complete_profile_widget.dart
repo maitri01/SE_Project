@@ -358,6 +358,12 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           return;
                         }
                       }
+
+                      await currentUserReference!.update(createUsersRecordData(
+                        email: '',
+                        displayName: '',
+                        photoUrl: _model.uploadedFileUrl,
+                      ));
                     },
                     child: Container(
                       width: 100.0,
@@ -370,6 +376,10 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                         valueOrDefault<String>(
                           _model.uploadedFileUrl,
                           'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
+                        ),
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          'assets/images/error_image.png',
                         ),
                       ),
                     ),
@@ -544,7 +554,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           child: SizedBox(
                             width: 40.0,
                             height: 40.0,
-                            child: SpinKitSquareCircle(
+                            child: SpinKitRipple(
                               color: FlutterFlowTheme.of(context).primary,
                               size: 40.0,
                             ),
@@ -602,7 +612,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                           child: SizedBox(
                             width: 40.0,
                             height: 40.0,
-                            child: SpinKitSquareCircle(
+                            child: SpinKitRipple(
                               color: FlutterFlowTheme.of(context).primary,
                               size: 40.0,
                             ),

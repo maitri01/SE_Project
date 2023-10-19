@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 
 import '../../auth/base_auth_user_provider.dart';
@@ -150,17 +151,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'MyPortfolio',
               path: 'myPortfolio',
-              builder: (context, params) => NavBarPage(
-                initialPage: '',
-                page: MyPortfolioWidget(
-                  profit: params.getParam('profit', ParamType.double),
-                  loss: params.getParam('loss', ParamType.double),
-                  bdate: params.getParam('bdate', ParamType.String),
-                  fname: params.getParam('fname', ParamType.String),
-                  uname: params.getParam('uname', ParamType.String),
-                  boid: params.getParam('boid', ParamType.int),
-                  so: params.getParam('so', ParamType.int),
-                ),
+              builder: (context, params) => MyPortfolioWidget(
+                profit: params.getParam('profit', ParamType.double),
+                loss: params.getParam('loss', ParamType.double),
+                bdate: params.getParam('bdate', ParamType.String),
+                fname: params.getParam('fname', ParamType.String),
+                uname: params.getParam('uname', ParamType.String),
+                boid: params.getParam('boid', ParamType.int),
+                so: params.getParam('so', ParamType.int),
               ),
             ),
             FFRoute(
@@ -169,20 +167,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ChangePasswordWidget(),
             ),
             FFRoute(
-              name: 'editProfile',
-              path: 'editProfile',
-              builder: (context, params) => NavBarPage(
-                initialPage: '',
-                page: EditProfileWidget(
-                  userProfile: params.getParam('userProfile',
-                      ParamType.DocumentReference, false, ['users']),
-                ),
-              ),
-            ),
-            FFRoute(
               name: 'notificationsSettings',
               path: 'notificationsSettings',
               builder: (context, params) => NotificationsSettingsWidget(),
+            ),
+            FFRoute(
+              name: 'editProfile',
+              path: 'editProfile',
+              builder: (context, params) => EditProfileWidget(
+                userProfile: params.getParam('userProfile',
+                    ParamType.DocumentReference, false, ['users']),
+              ),
             ),
             FFRoute(
               name: 'privacyPolicy',
@@ -219,6 +214,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
+      observers: [routeObserver],
     );
 
 extension NavParamExtensions on Map<String, String?> {
@@ -439,4 +435,24 @@ class TransitionInfo {
   final Alignment? alignment;
 
   static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+}
+
+class RootPageContext {
+  const RootPageContext(this.isRootPage, [this.errorRoute]);
+  final bool isRootPage;
+  final String? errorRoute;
+
+  static bool isInactiveRootPage(BuildContext context) {
+    final rootPageContext = context.read<RootPageContext?>();
+    final isRootPage = rootPageContext?.isRootPage ?? false;
+    final location = GoRouter.of(context).location;
+    return isRootPage &&
+        location != '/' &&
+        location != rootPageContext?.errorRoute;
+  }
+
+  static Widget wrap(Widget child, {String? errorRoute}) => Provider.value(
+        value: RootPageContext(true, errorRoute),
+        child: child,
+      );
 }

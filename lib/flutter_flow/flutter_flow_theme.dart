@@ -81,6 +81,19 @@ abstract class FlutterFlowTheme {
   late Color overlay;
   late Color primary30;
   late Color customColor1;
+  late Color thistle;
+  late Color tropicalIndigo;
+  late Color ultraViolet;
+  late Color night;
+  late Color thistle2;
+  late Color frenchGray;
+  late Color mintGreen;
+  late Color tiffanyBlue;
+  late Color fluorescentCyan;
+  late Color nonPhotoBlue;
+  late Color lightCyan;
+  late Color aliceBlue;
+  late Color slateBlue;
 
   @Deprecated('Use displaySmallFamily instead')
   String get title1Family => displaySmallFamily;
@@ -153,22 +166,22 @@ class LightModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF00968A);
-  late Color secondary = const Color(0xFFF2A384);
-  late Color tertiary = const Color(0xFF39D2C0);
-  late Color alternate = const Color(0xFFDBE2E7);
-  late Color primaryText = const Color(0xFF111417);
-  late Color secondaryText = const Color(0xFF8B97A2);
-  late Color primaryBackground = const Color(0xFFF1F4F8);
-  late Color secondaryBackground = const Color(0xFFFFFFFF);
-  late Color accent1 = const Color(0xFF616161);
-  late Color accent2 = const Color(0xFF757575);
-  late Color accent3 = const Color(0xFFE0E0E0);
-  late Color accent4 = const Color(0xFFEEEEEE);
-  late Color success = const Color(0xFF04A24C);
-  late Color warning = const Color(0xFFFCDC0C);
-  late Color error = const Color(0xFFE21C3D);
-  late Color info = const Color(0xFF1C4494);
+  late Color primary = const Color(0xFFBBC7CE);
+  late Color secondary = const Color(0xFFDCCFEC);
+  late Color tertiary = const Color(0xFFA997DF);
+  late Color alternate = const Color(0xFF4F517D);
+  late Color primaryText = const Color(0xFF0F0F0F);
+  late Color secondaryText = const Color(0xFF2C0E37);
+  late Color primaryBackground = const Color(0xFFFBFBFB);
+  late Color secondaryBackground = const Color(0xFFEEF8FF);
+  late Color accent1 = const Color(0xFF7D53DE);
+  late Color accent2 = const Color(0xFFF46036);
+  late Color accent3 = const Color(0xFF34F6F2);
+  late Color accent4 = const Color(0xFF69F0AE);
+  late Color success = const Color(0xFF00E676);
+  late Color warning = const Color(0xFFFFC107);
+  late Color error = const Color(0xFFF44336);
+  late Color info = const Color(0xFF2196F3);
 
   late Color background = Color(0xFF1A1F24);
   late Color darkBackground = Color(0xFF111417);
@@ -197,6 +210,19 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color overlay = Color(0xB2FFFFFF);
   late Color primary30 = Color(0x4D4B986C);
   late Color customColor1 = Color(0xFF2FB73C);
+  late Color thistle = Color(0xFFDDC4DD);
+  late Color tropicalIndigo = Color(0xFFA997DF);
+  late Color ultraViolet = Color(0xFF4F517D);
+  late Color night = Color(0xFF0F0F0F);
+  late Color thistle2 = Color(0xFFC4B7CB);
+  late Color frenchGray = Color(0xFFBBC7CE);
+  late Color mintGreen = Color(0xFFBFEDEF);
+  late Color tiffanyBlue = Color(0xFF98E2C6);
+  late Color fluorescentCyan = Color(0xFF34F6F2);
+  late Color nonPhotoBlue = Color(0xFF78E3FD);
+  late Color lightCyan = Color(0xFFD1F5FF);
+  late Color aliceBlue = Color(0xFFEEF8FF);
+  late Color slateBlue = Color(0xFF7D53DE);
 }
 
 abstract class Typography {
@@ -352,22 +378,22 @@ class DarkModeTheme extends FlutterFlowTheme {
   @Deprecated('Use tertiary instead')
   Color get tertiaryColor => tertiary;
 
-  late Color primary = const Color(0xFF00968A);
-  late Color secondary = const Color(0xFFF2A384);
-  late Color tertiary = const Color(0xFF39D2C0);
-  late Color alternate = const Color(0xFF262D34);
-  late Color primaryText = const Color(0xFFFFFFFF);
-  late Color secondaryText = const Color(0xFF8B97A2);
-  late Color primaryBackground = const Color(0xFF1A1F24);
-  late Color secondaryBackground = const Color(0xFF111417);
-  late Color accent1 = const Color(0xFFEEEEEE);
-  late Color accent2 = const Color(0xFFE0E0E0);
-  late Color accent3 = const Color(0xFF757575);
-  late Color accent4 = const Color(0xFF616161);
-  late Color success = const Color(0xFF04A24C);
-  late Color warning = const Color(0xFFFCDC0C);
-  late Color error = const Color(0xFFE21C3D);
-  late Color info = const Color(0xFF1C4494);
+  late Color primary = const Color(0xFF2A3D72);
+  late Color secondary = const Color(0xFFC2185B);
+  late Color tertiary = const Color(0xFF00B248);
+  late Color alternate = const Color(0xFFC79100);
+  late Color primaryText = const Color(0xFF212121);
+  late Color secondaryText = const Color(0xFF616161);
+  late Color primaryBackground = const Color(0xFFFFFFFF);
+  late Color secondaryBackground = const Color(0xFFE0E0E0);
+  late Color accent1 = const Color(0xFF00E5FF);
+  late Color accent2 = const Color(0xFFFF3D00);
+  late Color accent3 = const Color(0xFFAA00FF);
+  late Color accent4 = const Color(0xFF00C853);
+  late Color success = const Color(0xFF00B248);
+  late Color warning = const Color(0xFFFFA000);
+  late Color error = const Color(0xFFD32F2F);
+  late Color info = const Color(0xFF1976D2);
 
   late Color background = Color(0xFF1A1F24);
   late Color darkBackground = Color(0xFF111417);
@@ -396,6 +422,19 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color overlay = Color(0xB20B191E);
   late Color primary30 = Color(0x4D4B986C);
   late Color customColor1 = Color(0xFF452FB7);
+  late Color thistle = Color(0xFFDDC4DD);
+  late Color tropicalIndigo = Color(0xFFA997DF);
+  late Color ultraViolet = Color(0xFF4F517D);
+  late Color night = Color(0xFF0F0F0F);
+  late Color thistle2 = Color(0xFFC4B7CB);
+  late Color frenchGray = Color(0xFFBBC7CE);
+  late Color mintGreen = Color(0xFFBFEDEF);
+  late Color tiffanyBlue = Color(0xFF98E2C6);
+  late Color fluorescentCyan = Color(0xFF34F6F2);
+  late Color nonPhotoBlue = Color(0xFF78E3FD);
+  late Color lightCyan = Color(0xFFD1F5FF);
+  late Color aliceBlue = Color(0xFFEEF8FF);
+  late Color slateBlue = Color(0xFF7D53DE);
 }
 
 extension TextStyleHelper on TextStyle {

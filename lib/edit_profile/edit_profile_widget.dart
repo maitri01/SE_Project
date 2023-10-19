@@ -60,7 +60,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               child: SizedBox(
                 width: 40.0,
                 height: 40.0,
-                child: SpinKitSquareCircle(
+                child: SpinKitRipple(
                   color: FlutterFlowTheme.of(context).primary,
                   size: 40.0,
                 ),
@@ -119,34 +119,25 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                       color: FlutterFlowTheme.of(context).darkBackground,
                       shape: BoxShape.circle,
                     ),
-                    child: Container(
-                      width: 80.0,
-                      height: 80.0,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                      ),
-                      child: Image.network(
-                        valueOrDefault<String>(
-                          editProfileUsersRecord.photoUrl,
-                          'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        final selectedMedia = await selectMedia(
-                          mediaSource: MediaSource.photoGallery,
-                          multiImage: false,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          allowPhoto: true,
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).darkBackground,
+                          textColor: FlutterFlowTheme.of(context).textColor,
+                          pickerFontFamily: 'Lexend Deca',
                         );
                         if (selectedMedia != null &&
                             selectedMedia.every((m) =>
                                 validateFileFormat(m.storagePath, context))) {
-                          setState(() => _model.isDataUploading = true);
+                          setState(() => _model.isDataUploading1 = true);
                           var selectedUploadedFiles = <FFUploadedFile>[];
 
                           var downloadUrls = <String>[];
@@ -177,15 +168,99 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 .toList();
                           } finally {
                             ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            _model.isDataUploading = false;
+                            _model.isDataUploading1 = false;
                           }
                           if (selectedUploadedFiles.length ==
                                   selectedMedia.length &&
                               downloadUrls.length == selectedMedia.length) {
                             setState(() {
-                              _model.uploadedLocalFile =
+                              _model.uploadedLocalFile1 =
                                   selectedUploadedFiles.first;
-                              _model.uploadedFileUrl = downloadUrls.first;
+                              _model.uploadedFileUrl1 = downloadUrls.first;
+                            });
+                            showUploadMessage(context, 'Success!');
+                          } else {
+                            setState(() {});
+                            showUploadMessage(context, 'Failed to upload data');
+                            return;
+                          }
+                        }
+
+                        await currentUserReference!
+                            .update(createUsersRecordData(
+                          email: '',
+                          displayName: '',
+                          photoUrl: _model.uploadedFileUrl1,
+                        ));
+                      },
+                      child: Container(
+                        width: 80.0,
+                        height: 80.0,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                        ),
+                        child: Image.network(
+                          valueOrDefault<String>(
+                            editProfileUsersRecord.photoUrl,
+                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/finance-app-sample-kugwu4/assets/ijvuhvqbvns6/uiAvatar@2x.png',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                    child: FFButtonWidget(
+                      onPressed: () async {
+                        final selectedMedia = await selectMedia(
+                          mediaSource: MediaSource.photoGallery,
+                          multiImage: false,
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
+                          setState(() => _model.isDataUploading2 = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          var downloadUrls = <String>[];
+                          try {
+                            showUploadMessage(
+                              context,
+                              'Uploading file...',
+                              showLoading: true,
+                            );
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                      height: m.dimensions?.height,
+                                      width: m.dimensions?.width,
+                                      blurHash: m.blurHash,
+                                    ))
+                                .toList();
+
+                            downloadUrls = (await Future.wait(
+                              selectedMedia.map(
+                                (m) async =>
+                                    await uploadData(m.storagePath, m.bytes),
+                              ),
+                            ))
+                                .where((u) => u != null)
+                                .map((u) => u!)
+                                .toList();
+                          } finally {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            _model.isDataUploading2 = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                                  selectedMedia.length &&
+                              downloadUrls.length == selectedMedia.length) {
+                            setState(() {
+                              _model.uploadedLocalFile2 =
+                                  selectedUploadedFiles.first;
+                              _model.uploadedFileUrl2 = downloadUrls.first;
                             });
                             showUploadMessage(context, 'Success!');
                           } else {
@@ -441,7 +516,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             _model.yourTitleController.text,
                             'Badass Geek',
                           ),
-                          photoUrl: _model.uploadedFileUrl,
+                          photoUrl: _model.uploadedFileUrl2,
                         ));
                         context.pop();
                       },

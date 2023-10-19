@@ -91,7 +91,7 @@ class _NotificationsSettingsWidgetState
                 child: SizedBox(
                   width: 40.0,
                   height: 40.0,
-                  child: SpinKitSquareCircle(
+                  child: SpinKitRipple(
                     color: FlutterFlowTheme.of(context).primary,
                     size: 40.0,
                   ),

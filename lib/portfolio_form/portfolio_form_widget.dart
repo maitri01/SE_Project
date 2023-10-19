@@ -614,7 +614,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   child: FlutterFlowWebView(
                     content: 'https://www.cre8ivedesigner.com/disclaimer',
                     bypass: false,
-                    height: 70.0,
+                    height: 200.0,
                     verticalScroll: true,
                     horizontalScroll: false,
                   ),

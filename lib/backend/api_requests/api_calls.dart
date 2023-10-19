@@ -2,27 +2,67 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import '../../flutter_flow/flutter_flow_util.dart';
-
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class NiftyCall {
-  static Future<ApiCallResponse> call() {
+/// Start AssemblyAI Group Code
+
+class AssemblyAIGroup {
+  static String baseUrl = 'https://api.assemblyai.com/v2';
+  static Map<String, String> headers = {
+    'authorization': '4c4108831bd541d9ad9a5d2fc2aa0590',
+  };
+  static TranscriptCall transcriptCall = TranscriptCall();
+  static GetTrancriptCall getTrancriptCall = GetTrancriptCall();
+}
+
+class TranscriptCall {
+  Future<ApiCallResponse> call({
+    String? audioUrl = '',
+  }) {
+    final ffApiRequestBody = '''
+{
+  "audio_url": "${audioUrl}"
+}''';
     return ApiManager.instance.makeApiCall(
-      callName: 'NIFTY',
-      apiUrl: 'https://latest-stock-price.p.rapidapi.com/price',
+      callName: 'transcript',
+      apiUrl: '${AssemblyAIGroup.baseUrl}/transcript',
+      callType: ApiCallType.POST,
+      headers: {
+        'authorization': '4c4108831bd541d9ad9a5d2fc2aa0590',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic id(dynamic response) => getJsonField(
+        response,
+        r'''$.id''',
+      );
+}
+
+class GetTrancriptCall {
+  Future<ApiCallResponse> call({
+    String? id = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getTrancript',
+      apiUrl: '${AssemblyAIGroup.baseUrl}/transcript/${id}',
       callType: ApiCallType.GET,
       headers: {
-        'X-RapidAPI-Key': 'f40ef21d0bmsh98428bce74b479ep12f80bjsn3b9d2aa1a891',
-        'X-RapidAPI-Host': 'latest-stock-price.p.rapidapi.com',
-        'useQueryString': 'true',
+        'authorization': '4c4108831bd541d9ad9a5d2fc2aa0590',
       },
       params: {
-        'Indices': "NIFTY 50",
-        'Identifier': "NIFTY 50",
+        'id': id,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -31,12 +71,17 @@ class NiftyCall {
     );
   }
 
-  static dynamic niftyprice(dynamic response) => getJsonField(
+  dynamic id(dynamic response) => getJsonField(
         response,
-        r'''$[0].lastPrice''',
-        true,
+        r'''$.id''',
+      );
+  dynamic text(dynamic response) => getJsonField(
+        response,
+        r'''$.text''',
       );
 }
+
+/// End AssemblyAI Group Code
 
 class NasdaqStocksCall {
   static Future<ApiCallResponse> call({
@@ -212,6 +257,35 @@ class RsiCall {
   static dynamic rsi(dynamic response) => getJsonField(
         response,
         r'''$..['RSI']''',
+        true,
+      );
+}
+
+class NiftyCall {
+  static Future<ApiCallResponse> call() {
+    return ApiManager.instance.makeApiCall(
+      callName: 'NIFTY',
+      apiUrl: 'https://latest-stock-price.p.rapidapi.com/price',
+      callType: ApiCallType.GET,
+      headers: {
+        'X-RapidAPI-Key': 'f40ef21d0bmsh98428bce74b479ep12f80bjsn3b9d2aa1a891',
+        'X-RapidAPI-Host': 'latest-stock-price.p.rapidapi.com',
+        'useQueryString': 'true',
+      },
+      params: {
+        'Indices': "NIFTY 50",
+        'Identifier': "NIFTY 50",
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic niftyprice(dynamic response) => getJsonField(
+        response,
+        r'''$[0].lastPrice''',
         true,
       );
 }

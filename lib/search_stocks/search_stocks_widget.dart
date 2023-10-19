@@ -1,16 +1,19 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/permissions_util.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:record/record.dart';
 import 'search_stocks_model.dart';
 export 'search_stocks_model.dart';
 
@@ -78,7 +81,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
             size: 30.0,
           ),
           onPressed: () async {
-            context.safePop();
+            context.pushNamed('homePage');
           },
         ),
         title: Text(
@@ -95,7 +98,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -281,138 +284,260 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 0.0, 4.0, 0.0),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    setState(() {
+                                      FFAppState().searchtext =
+                                          _model.searchSelectedOption!;
+                                    });
+                                    setState(() {
+                                      FFAppState().ifsearchtextnull = true;
+                                    });
+                                    FFAppState().addToWatchlistt(
+                                        FFAppState().searchtext);
+                                    _model.nasdaqapiResul =
+                                        await NasdaqStocksCall.call(
+                                      name: FFAppState().searchtext,
+                                    );
+                                    FFAppState().searchprice =
+                                        NasdaqStocksCall.price(
+                                      (_model.nasdaqapiResul?.jsonBody ?? ''),
+                                    ).toString();
+                                    FFAppState().searchchangepercentage =
+                                        NasdaqStocksCall.changepercentage(
+                                      (_model.nasdaqapiResul?.jsonBody ?? ''),
+                                    ).toString();
+                                    FFAppState().searchttotalvolume =
+                                        NasdaqStocksCall.totalvolume(
+                                      (_model.nasdaqapiResul?.jsonBody ?? ''),
+                                    ).toString();
+                                    setState(() {
+                                      FFAppState().searchchangepoint =
+                                          NasdaqStocksCall.changepoint(
+                                        (_model.nasdaqapiResul?.jsonBody ?? ''),
+                                      ).toString();
+                                    });
+
+                                    setState(() {});
+                                  },
+                                  child: Icon(
+                                    Icons.search_rounded,
+                                    color:
+                                        FlutterFlowTheme.of(context).tertiary,
+                                    size: 40.0,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 0.0, 4.0, 0.0),
+                                child: FutureBuilder<ApiCallResponse>(
+                                  future: AssemblyAIGroup.transcriptCall.call(
+                                    audioUrl: _model.audiopath,
+                                  ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 40.0,
+                                          height: 40.0,
+                                          child: SpinKitRipple(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 40.0,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final micIconTranscriptResponse =
+                                        snapshot.data!;
+                                    return InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        await requestPermission(
+                                            microphonePermission);
+                                        if (await getPermissionStatus(
+                                            microphonePermission)) {
+                                          _model.audioRecorder ??= Record();
+                                          if (await _model.audioRecorder!
+                                              .hasPermission()) {
+                                            await _model.audioRecorder!.start();
+                                          } else {
+                                            showSnackbar(
+                                              context,
+                                              'You have not provided permission to record audio.',
+                                            );
+                                          }
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Can\'t Record',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                        ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                        }
+
+                                        _model.audiopath =
+                                            await _model.audioRecorder?.stop();
+                                        _model.apiResultsoy =
+                                            await AssemblyAIGroup.transcriptCall
+                                                .call(
+                                          audioUrl: _model.audiopath,
+                                        );
+                                        if ((_model.apiResultsoy?.succeeded ??
+                                            true)) {
+                                          _model.apiResultggf =
+                                              await AssemblyAIGroup
+                                                  .getTrancriptCall
+                                                  .call(
+                                            id: AssemblyAIGroup.transcriptCall
+                                                .id(
+                                                  (_model.apiResultsoy
+                                                          ?.jsonBody ??
+                                                      ''),
+                                                )
+                                                .toString(),
+                                          );
+                                          if ((_model.apiResultggf?.succeeded ??
+                                              true)) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'hii',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                          }
+                                        }
+
+                                        setState(() {});
+                                      },
+                                      child: Icon(
+                                        Icons.mic_outlined,
+                                        color: FlutterFlowTheme.of(context)
+                                            .tertiary,
+                                        size: 40.0,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
                             ],
                           ),
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        setState(() {
-                          FFAppState().searchtext =
-                              _model.searchSelectedOption!;
-                        });
-                        setState(() {
-                          FFAppState().ifsearchtextnull = true;
-                        });
-                        FFAppState().addToWatchlistt(FFAppState().searchtext);
-                        _model.nasdaqapiResul = await NasdaqStocksCall.call(
-                          name: FFAppState().searchtext,
-                        );
-                        FFAppState().searchprice = NasdaqStocksCall.price(
-                          (_model.nasdaqapiResul?.jsonBody ?? ''),
-                        ).toString();
-                        FFAppState().searchchangepercentage =
-                            NasdaqStocksCall.changepercentage(
-                          (_model.nasdaqapiResul?.jsonBody ?? ''),
-                        ).toString();
-                        FFAppState().searchttotalvolume =
-                            NasdaqStocksCall.totalvolume(
-                          (_model.nasdaqapiResul?.jsonBody ?? ''),
-                        ).toString();
-                        setState(() {
-                          FFAppState().searchchangepoint =
-                              NasdaqStocksCall.changepoint(
-                            (_model.nasdaqapiResul?.jsonBody ?? ''),
-                          ).toString();
-                        });
-
-                        setState(() {});
-                      },
-                      child: Icon(
-                        Icons.search_rounded,
-                        color: FlutterFlowTheme.of(context).tertiary,
-                        size: 40.0,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
-            Expanded(
+            Flexible(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
+                  Flexible(
                     child: Container(
                       width: 385.5,
                       height: 684.1,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
-                      child: Visibility(
-                        visible: FFAppState().ifsearchtextnull,
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 15.0, 0.0, 0.0),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 4.0,
-                                  color: Color(0x25090F13),
-                                  offset: Offset(0.0, 2.0),
-                                )
-                              ],
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(0.0),
-                                bottomRight: Radius.circular(0.0),
-                                topLeft: Radius.circular(12.0),
-                                topRight: Radius.circular(12.0),
-                              ),
-                            ),
-                            child: Padding(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          if (FFAppState().ifsearchtextnull)
+                            Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 20.0, 16.0, 16.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Search Summary',
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineSmall
-                                        .override(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 25.0,
-                                        ),
+                                  0.0, 15.0, 0.0, 15.0),
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 4.0,
+                                      color: Color(0x25090F13),
+                                      offset: Offset(0.0, 2.0),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(0.0),
+                                    bottomRight: Radius.circular(0.0),
+                                    topLeft: Radius.circular(12.0),
+                                    topRight: Radius.circular(12.0),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Real-time values for the speecific stock.',
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Search Summary',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodySmall,
+                                          .headlineSmall
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            fontSize: 25.0,
+                                          ),
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 24.0,
-                                    thickness: 2.0,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                  ),
-                                  ListView(
-                                    padding: EdgeInsets.zero,
-                                    primary: false,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 8.0),
-                                        child: Container(
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 4.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Real-time values for the speecific stock.',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodySmall,
+                                      ),
+                                    ),
+                                    ListView(
+                                      padding: EdgeInsets.zero,
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      children: [
+                                        Container(
                                           width: double.infinity,
                                           height: 60.0,
                                           decoration: BoxDecoration(
@@ -476,13 +601,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 20.0, 0.0, 0.0),
-                                    child: Column(
+                                      ],
+                                    ),
+                                    Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
@@ -606,45 +727,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 20.0, 24.0, 0.0),
-                                          child: Theme(
-                                            data: ThemeData(
-                                              unselectedWidgetColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .accent2,
-                                            ),
-                                            child: CheckboxListTile(
-                                              value: _model
-                                                      .checkboxListTileValue ??=
-                                                  true,
-                                              onChanged: (newValue) async {
-                                                setState(() => _model
-                                                        .checkboxListTileValue =
-                                                    newValue!);
-                                              },
-                                              title: Text(
-                                                'Add Stock to Watchlist',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineSmall,
-                                              ),
-                                              tileColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              activeColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              dense: false,
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .trailing,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 25.0, 16.0, 24.0),
+                                                  16.0, 5.0, 16.0, 4.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
                                               context.pushNamed(
@@ -662,7 +745,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                             },
                                             text: 'Analysis',
                                             options: FFButtonOptions(
-                                              width: double.infinity,
+                                              width: 180.0,
                                               height: 50.0,
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
@@ -689,12 +772,32 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
+                          FlutterFlowAudioPlayer(
+                            audio: Audio.network(
+                              'https://filesamples.com/samples/audio/mp3/sample3.mp3',
+                              metas: Metas(
+                                id: 'sample3.mp3-ce400d41',
+                              ),
+                            ),
+                            titleTextStyle:
+                                FlutterFlowTheme.of(context).titleLarge,
+                            playbackDurationTextStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            fillColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            playbackButtonColor:
+                                FlutterFlowTheme.of(context).primary,
+                            activeTrackColor:
+                                FlutterFlowTheme.of(context).alternate,
+                            elevation: 4.0,
+                            playInBackground:
+                                PlayInBackground.disabledRestoreOnForeground,
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +41,15 @@ class _ChartsWidgetState extends State<ChartsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
@@ -96,396 +106,351 @@ class _ChartsWidgetState extends State<ChartsWidget> {
             centerTitle: false,
             elevation: 2.0,
           ),
-          body: SafeArea(
-            top: true,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                SingleChildScrollView(
-                  child: Column(
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 20.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      FFAppState().searchtext,
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.of(context)
+                          .headlineSmall
+                          .override(
+                            fontFamily: 'Lexend',
+                            color: FlutterFlowTheme.of(context).customColor4,
+                            fontSize: 25.0,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
-                        height: 53.2,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 6.0,
-                              color: Color(0x4B1A1F24),
-                              offset: Offset(0.0, 2.0),
-                            )
-                          ],
-                          gradient: LinearGradient(
-                            colors: [Color(0xFF00968A), Color(0xFFF2A384)],
-                            stops: [0.0, 1.0],
-                            begin: AlignmentDirectional(0.94, -1.0),
-                            end: AlignmentDirectional(-0.94, 1.0),
-                          ),
-                          borderRadius: BorderRadius.circular(0.0),
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 8.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      FFAppState().searchtext,
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineSmall
-                                          .override(
-                                            fontFamily: 'Lexend',
-                                            color: FlutterFlowTheme.of(context)
-                                                .textColor,
-                                            fontSize: 25.0,
-                                          ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  20.0, 0.0, 20.0, 12.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Text(
-                                    'History ',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Lexend',
-                                          fontSize: 20.0,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Material(
-                            color: Colors.transparent,
-                            elevation: 0.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.982,
-                              height: 292.3,
-                              decoration: BoxDecoration(
+                      Flexible(
+                        child: Material(
+                          color: Colors.transparent,
+                          elevation: 0.0,
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: 360.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              shape: BoxShape.rectangle,
+                              border: Border.all(
                                 color: FlutterFlowTheme.of(context)
                                     .primaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      child: FlutterFlowLineChart(
-                                        data: [
-                                          FFLineChartData(
-                                            xData:
-                                                HistoricDataYahooCall.dateutc(
-                                              chartsHistoricDataYahooResponse
-                                                  .jsonBody,
-                                            )!,
-                                            yData: HistoricDataYahooCall.close(
-                                              chartsHistoricDataYahooResponse
-                                                  .jsonBody,
-                                            )!,
-                                            settings: LineChartBarData(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              barWidth: 2.0,
-                                              belowBarData: BarAreaData(
-                                                show: true,
-                                                color: Color(0x00000000),
-                                              ),
-                                            ),
-                                          )
-                                        ],
-                                        chartStylingInfo: ChartStylingInfo(
-                                          enableTooltip: true,
-                                          tooltipBackgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .warning,
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .secondaryBackground,
-                                          showGrid: true,
-                                          showBorder: false,
-                                        ),
-                                        axisBounds: AxisBounds(),
-                                        xAxisLabelInfo: AxisLabelInfo(
-                                          title: 'Date',
-                                          titleTextStyle: GoogleFonts.getFont(
-                                            'Lexend',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                          ),
-                                          showLabels: true,
-                                          labelTextStyle: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 8.0,
-                                          ),
-                                          labelInterval: 5000.0,
-                                        ),
-                                        yAxisLabelInfo: AxisLabelInfo(
-                                          title: 'Close Price (USD)',
-                                          titleTextStyle: GoogleFonts.getFont(
-                                            'Lexend',
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 14.0,
-                                          ),
-                                          showLabels: true,
-                                          labelTextStyle: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            fontSize: 8.0,
-                                          ),
-                                          labelInterval: 1.0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Material(
-                            color: Colors.transparent,
-                            elevation: 0.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
+                            alignment: AlignmentDirectional(0.00, 0.00),
                             child: Container(
-                              width: MediaQuery.sizeOf(context).width * 0.982,
-                              height: 292.3,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
-                                borderRadius: BorderRadius.circular(8.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      child: Stack(
-                                        children: [
-                                          FlutterFlowLineChart(
-                                            data: [
-                                              FFLineChartData(
-                                                xData: HistoricDataYahooCall
-                                                    .dateutc(
-                                                  chartsHistoricDataYahooResponse
-                                                      .jsonBody,
-                                                )!,
-                                                yData:
-                                                    HistoricDataYahooCall.close(
-                                                  chartsHistoricDataYahooResponse
-                                                      .jsonBody,
-                                                )!,
-                                                settings: LineChartBarData(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  barWidth: 2.0,
-                                                ),
-                                              ),
-                                              FFLineChartData(
-                                                xData: HistoricDataYahooCall
-                                                    .dateutc(
-                                                  chartsHistoricDataYahooResponse
-                                                      .jsonBody,
-                                                )!,
-                                                yData:
-                                                    HistoricDataYahooCall.open(
-                                                  chartsHistoricDataYahooResponse
-                                                      .jsonBody,
-                                                )!,
-                                                settings: LineChartBarData(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .warning,
-                                                  barWidth: 1.0,
-                                                ),
-                                              )
-                                            ],
-                                            chartStylingInfo: ChartStylingInfo(
-                                              enableTooltip: true,
-                                              tooltipBackgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .warning,
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              showGrid: true,
-                                              showBorder: false,
-                                            ),
-                                            axisBounds: AxisBounds(),
-                                            xAxisLabelInfo: AxisLabelInfo(
-                                              title: 'Date',
-                                              titleTextStyle:
-                                                  GoogleFonts.getFont(
-                                                'Lexend',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 14.0,
-                                              ),
-                                              showLabels: true,
-                                              labelTextStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 8.0,
-                                              ),
-                                              labelInterval: 500000.0,
-                                            ),
-                                            yAxisLabelInfo: AxisLabelInfo(
-                                              title: 'Price (USD)',
-                                              titleTextStyle:
-                                                  GoogleFonts.getFont(
-                                                'Lexend',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 14.0,
-                                              ),
-                                              showLabels: true,
-                                              labelTextStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontWeight: FontWeight.w100,
-                                                fontSize: 8.0,
-                                              ),
-                                              labelInterval: 1.0,
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: AlignmentDirectional(
-                                                1.00, 1.00),
-                                            child: FlutterFlowChartLegendWidget(
-                                              entries: [
-                                                LegendEntry(
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                    'Close'),
-                                                LegendEntry(
-                                                    FlutterFlowTheme.of(context)
-                                                        .warning,
-                                                    'Open'),
-                                              ],
-                                              width: 100.0,
-                                              height: 50.0,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
-                                              textPadding: EdgeInsetsDirectional
-                                                  .fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(5.0, 0.0, 5.0, 0.0),
-                                              borderWidth: 1.0,
-                                              indicatorSize: 10.0,
-                                            ),
-                                          ),
-                                        ],
+                              width: MediaQuery.sizeOf(context).width * 0.9,
+                              height: MediaQuery.sizeOf(context).height * 0.9,
+                              child: FlutterFlowLineChart(
+                                data: [
+                                  FFLineChartData(
+                                    xData: HistoricDataYahooCall.dateutc(
+                                      chartsHistoricDataYahooResponse.jsonBody,
+                                    )!,
+                                    yData: HistoricDataYahooCall.close(
+                                      chartsHistoricDataYahooResponse.jsonBody,
+                                    )!,
+                                    settings: LineChartBarData(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      barWidth: 2.0,
+                                      belowBarData: BarAreaData(
+                                        show: true,
+                                        color: FlutterFlowTheme.of(context)
+                                            .tropicalIndigo,
                                       ),
                                     ),
-                                  ),
+                                  )
                                 ],
+                                chartStylingInfo: ChartStylingInfo(
+                                  enableTooltip: true,
+                                  backgroundColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  showGrid: true,
+                                  borderWidth: 1.0,
+                                ),
+                                axisBounds: AxisBounds(),
+                                xAxisLabelInfo: AxisLabelInfo(
+                                  title: 'Date',
+                                  titleTextStyle: TextStyle(
+                                    color: Color(0xFF0F0F0F),
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                                yAxisLabelInfo: AxisLabelInfo(
+                                  title: 'Close Price (USD)',
+                                  titleTextStyle: GoogleFonts.getFont(
+                                    'Lexend',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 14.0,
+                                  ),
+                                  showLabels: true,
+                                  labelTextStyle: GoogleFonts.getFont(
+                                    'Roboto',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 8.0,
+                                  ),
+                                  labelInterval: 1.0,
+                                ),
                               ),
                             ),
                           ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.pushNamed('Charts2');
-                    },
-                    text: 'More Charts',
-                    options: FFButtonOptions(
-                      width: 130.0,
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lexend',
-                                color: Colors.white,
-                              ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 4.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Summary ',
+                          style:
+                              FlutterFlowTheme.of(context).bodySmall.override(
+                                    fontFamily: 'Lexend',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 15.0, 24.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Price (USD - \$)',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
+                        Text(
+                          FFAppState().searchprice,
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Lexend',
+                                color:
+                                    FlutterFlowTheme.of(context).customColor4,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 25.0, 24.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Open (USD - \$)',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
+                        Text(
+                          (HistoricDataYahooCall.open(
+                            chartsHistoricDataYahooResponse.jsonBody,
+                          ) as List)
+                              .map<String>((s) => s.toString())
+                              .toList()
+                              .first
+                              .toString(),
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Lexend',
+                                color:
+                                    FlutterFlowTheme.of(context).customColor4,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 25.0, 24.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Close (USD - \$)',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
+                        Text(
+                          (HistoricDataYahooCall.close(
+                            chartsHistoricDataYahooResponse.jsonBody,
+                          ) as List)
+                              .map<String>((s) => s.toString())
+                              .toList()
+                              .first
+                              .toString(),
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Lexend',
+                                color:
+                                    FlutterFlowTheme.of(context).customColor4,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 25.0, 24.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Total Volume',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
+                        Text(
+                          FFAppState().searchttotalvolume,
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Lexend',
+                                color:
+                                    FlutterFlowTheme.of(context).customColor4,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 25.0, 24.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Change Percentage (in %)',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
+                        Flexible(
+                          child: Text(
+                            FFAppState().searchchangepercentage,
+                            style: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Lexend',
+                                  color:
+                                      FlutterFlowTheme.of(context).customColor4,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(24.0, 25.0, 24.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Change Point',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
+                        Text(
+                          FFAppState().searchchangepoint,
+                          style: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .override(
+                                fontFamily: 'Lexend',
+                                color:
+                                    FlutterFlowTheme.of(context).customColor4,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 0.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 5.0, 16.0, 4.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed(
+                                'Charts2',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType:
+                                        PageTransitionType.leftToRight,
+                                  ),
+                                },
+                              );
+                            },
+                            text: 'Detailed Ananlysis',
+                            options: FFButtonOptions(
+                              width: 207.0,
+                              height: 50.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Lexend',
+                                    color: Colors.white,
+                                    fontSize: 20.0,
+                                  ),
+                              elevation: 2.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         );
       },

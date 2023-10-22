@@ -8,6 +8,7 @@ import '/flutter_flow/upload_data.dart';
 import 'edit_profile_widget.dart' show EditProfileWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -26,15 +27,19 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   String uploadedFileUrl2 = '';
 
   // State field(s) for yourName widget.
+  FocusNode? yourNameFocusNode;
   TextEditingController? yourNameController;
   String? Function(BuildContext, String?)? yourNameControllerValidator;
   // State field(s) for yourEmail widget.
+  FocusNode? yourEmailFocusNode;
   TextEditingController? yourEmailController;
   String? Function(BuildContext, String?)? yourEmailControllerValidator;
   // State field(s) for yourAge widget.
+  FocusNode? yourAgeFocusNode;
   TextEditingController? yourAgeController;
   String? Function(BuildContext, String?)? yourAgeControllerValidator;
   // State field(s) for yourTitle widget.
+  FocusNode? yourTitleFocusNode;
   TextEditingController? yourTitleController;
   String? Function(BuildContext, String?)? yourTitleControllerValidator;
 
@@ -43,9 +48,16 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   void initState(BuildContext context) {}
 
   void dispose() {
+    yourNameFocusNode?.dispose();
     yourNameController?.dispose();
+
+    yourEmailFocusNode?.dispose();
     yourEmailController?.dispose();
+
+    yourAgeFocusNode?.dispose();
     yourAgeController?.dispose();
+
+    yourTitleFocusNode?.dispose();
     yourTitleController?.dispose();
   }
 

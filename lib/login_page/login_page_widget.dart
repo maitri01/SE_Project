@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     _model = createModel(context, () => LoginPageModel());
 
     _model.emailAddressLoginController ??= TextEditingController();
+    _model.emailAddressLoginFocusNode ??= FocusNode();
     _model.passwordLoginController ??= TextEditingController();
+    _model.passwordLoginFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -40,6 +43,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -129,6 +141,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 child: TextFormField(
                                   controller:
                                       _model.emailAddressLoginController,
+                                  focusNode: _model.emailAddressLoginFocusNode,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Email Address',
@@ -184,6 +197,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     0.0, 12.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.passwordLoginController,
+                                  focusNode: _model.passwordLoginFocusNode,
                                   obscureText: !_model.passwordLoginVisibility,
                                   decoration: InputDecoration(
                                     labelText: 'Password',

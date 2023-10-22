@@ -1,5 +1,6 @@
 // Automatic FlutterFlow imports
 import '/backend/backend.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
@@ -112,7 +113,7 @@ class _ChartwidgetState extends State<Chartwidget> {
       children: <Widget>[
         Stack(children: <Widget>[
           Container(
-            height: 450,
+            height: 500,
             width: double.infinity,
             child: KChartWidget(
               datas,
@@ -142,16 +143,17 @@ class _ChartwidgetState extends State<Chartwidget> {
           if (showLoading)
             Container(
                 width: double.infinity,
-                height: 450,
+                height: 500,
                 alignment: Alignment.center,
                 child: const CircularProgressIndicator()),
         ]),
         buildButtons(),
         if (_bids != null && _asks != null)
           Container(
-            height: 230,
+            height: 250,
             width: double.infinity,
             child: DepthChart(_bids!, _asks!, chartColors),
+            color: Colors.white,
           )
       ],
     );
@@ -159,7 +161,7 @@ class _ChartwidgetState extends State<Chartwidget> {
 
   Widget buildButtons() {
     return Wrap(
-      alignment: WrapAlignment.center,
+      alignment: WrapAlignment.spaceEvenly,
       children: <Widget>[
         button("Time Mode", onPressed: () => isLine = true),
         button("K Line Mode", onPressed: () => isLine = false),
@@ -181,27 +183,27 @@ class _ChartwidgetState extends State<Chartwidget> {
             onPressed: () => _secondaryState = SecondaryState.NONE),
         button(_volHidden ? "Show Vol" : "Hide Vol",
             onPressed: () => _volHidden = !_volHidden),
-        button("Change Language", onPressed: () => isChinese = !isChinese),
+        // button("Change Language", onPressed: () => isChinese = !isChinese),
         button(_hideGrid ? "Show Grid" : "Hide Grid",
             onPressed: () => _hideGrid = !_hideGrid),
         button(_showNowPrice ? "Hide Now Price" : "Show Now Price",
             onPressed: () => _showNowPrice = !_showNowPrice),
-        button("Customize UI", onPressed: () {
-          setState(() {
-            this.isChangeUI = !this.isChangeUI;
-            if (this.isChangeUI) {
-              chartColors.selectBorderColor = Colors.red;
-              chartColors.selectFillColor = Colors.red;
-              chartColors.lineFillColor = Colors.red;
-              chartColors.kLineColor = Colors.yellow;
-            } else {
-              chartColors.selectBorderColor = Color(0xff6C7A86);
-              chartColors.selectFillColor = Color(0xff0D1722);
-              chartColors.lineFillColor = Color(0x554C86CD);
-              chartColors.kLineColor = Color(0xff4C86CD);
-            }
-          });
-        }),
+        // button("Customize UI", onPressed: () {
+        //   setState(() {
+        //     this.isChangeUI = !this.isChangeUI;
+        //     if (this.isChangeUI) {
+        //       chartColors.selectBorderColor = Colors.red;
+        //       chartColors.selectFillColor = Colors.red;
+        //       chartColors.lineFillColor = Colors.red;
+        //       chartColors.kLineColor = Colors.yellow;
+        //     } else {
+        //       chartColors.selectBorderColor = Color(0xff6C7A86);
+        //       chartColors.selectFillColor = Color(0xff0D1722);
+        //       chartColors.lineFillColor = Color(0x554C86CD);
+        //       chartColors.kLineColor = Color(0xff4C86CD);
+        //     }
+        //   });
+        // }),
         button("Change PriceTextPaint",
             onPressed: () => setState(() {
                   _priceLeft = !_priceLeft;
@@ -225,13 +227,13 @@ class _ChartwidgetState extends State<Chartwidget> {
       },
       child: Text(text),
       style: TextButton.styleFrom(
-        foregroundColor: Colors.white,
-        minimumSize: const Size(44, 22),
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        foregroundColor: Colors.black,
+        minimumSize: const Size(66, 44),
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
         shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(2.0)),
+          borderRadius: BorderRadius.all(Radius.circular(1.0)),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.white,
       ),
     );
   }

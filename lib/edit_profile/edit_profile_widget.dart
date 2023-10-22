@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,13 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
 
+    _model.yourNameFocusNode ??= FocusNode();
+
+    _model.yourEmailFocusNode ??= FocusNode();
+
+    _model.yourAgeFocusNode ??= FocusNode();
+
+    _model.yourTitleFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -47,6 +55,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return StreamBuilder<UsersRecord>(
@@ -214,9 +231,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        final selectedMedia = await selectMedia(
-                          mediaSource: MediaSource.photoGallery,
-                          multiImage: false,
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          allowPhoto: true,
                         );
                         if (selectedMedia != null &&
                             selectedMedia.every((m) =>
@@ -297,6 +315,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           TextEditingController(
                         text: editProfileUsersRecord.displayName,
                       ),
+                      focusNode: _model.yourNameFocusNode,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Name',
@@ -350,6 +369,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           TextEditingController(
                         text: editProfileUsersRecord.email,
                       ),
+                      focusNode: _model.yourEmailFocusNode,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Email Address',
@@ -404,6 +424,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           TextEditingController(
                         text: editProfileUsersRecord.age.toString(),
                       ),
+                      focusNode: _model.yourAgeFocusNode,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Age',
@@ -458,6 +479,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           TextEditingController(
                         text: editProfileUsersRecord.userTitle,
                       ),
+                      focusNode: _model.yourTitleFocusNode,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Your Title',

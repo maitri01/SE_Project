@@ -61,6 +61,11 @@ class UsersRecord extends FirestoreRecord {
   String get password => _password ?? '';
   bool hasPassword() => _password != null;
 
+  // "audiopath" field.
+  String? _audiopath;
+  String get audiopath => _audiopath ?? '';
+  bool hasAudiopath() => _audiopath != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -71,6 +76,7 @@ class UsersRecord extends FirestoreRecord {
     _age = castToType<int>(snapshotData['age']);
     _userTitle = snapshotData['userTitle'] as String?;
     _password = snapshotData['password'] as String?;
+    _audiopath = snapshotData['audiopath'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +122,7 @@ Map<String, dynamic> createUsersRecordData({
   int? age,
   String? userTitle,
   String? password,
+  String? audiopath,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createUsersRecordData({
       'age': age,
       'userTitle': userTitle,
       'password': password,
+      'audiopath': audiopath,
     }.withoutNulls,
   );
 
@@ -147,7 +155,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.age == e2?.age &&
         e1?.userTitle == e2?.userTitle &&
-        e1?.password == e2?.password;
+        e1?.password == e2?.password &&
+        e1?.audiopath == e2?.audiopath;
   }
 
   @override
@@ -160,7 +169,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.phoneNumber,
         e?.age,
         e?.userTitle,
-        e?.password
+        e?.password,
+        e?.audiopath
       ]);
 
   @override

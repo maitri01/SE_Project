@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 
-import '../../auth/base_auth_user_provider.dart';
+import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
 import '/main.dart';
@@ -132,23 +132,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
             ),
             FFRoute(
-              name: 'homePage',
-              path: 'homePage',
-              requireAuth: true,
-              builder: (context, params) => params.isEmpty
-                  ? NavBarPage(initialPage: 'homePage')
-                  : HomePageWidget(
-                      niftyprice:
-                          params.getParam('niftyprice', ParamType.double),
-                      watchlistcondition:
-                          params.getParam('watchlistcondition', ParamType.bool),
-                      lastwatchlistprice: params.getParam(
-                          'lastwatchlistprice', ParamType.double),
-                      firstwatchlistprice: params.getParam(
-                          'firstwatchlistprice', ParamType.double),
-                    ),
-            ),
-            FFRoute(
               name: 'MyPortfolio',
               path: 'myPortfolio',
               builder: (context, params) => MyPortfolioWidget(
@@ -170,6 +153,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'notificationsSettings',
               path: 'notificationsSettings',
               builder: (context, params) => NotificationsSettingsWidget(),
+            ),
+            FFRoute(
+              name: 'homePage',
+              path: 'homePage',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'homePage')
+                  : HomePageWidget(
+                      niftyprice:
+                          params.getParam('niftyprice', ParamType.double),
+                      high: params.getParam('high', ParamType.double),
+                      low: params.getParam('low', ParamType.double),
+                      volume: params.getParam('volume', ParamType.int),
+                    ),
             ),
             FFRoute(
               name: 'editProfile',

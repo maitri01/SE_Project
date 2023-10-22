@@ -10,6 +10,7 @@ import '/flutter_flow/upload_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -221,8 +222,11 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
     _model = createModel(context, () => CompleteProfileModel());
 
     _model.yourNameController ??= TextEditingController();
+    _model.yourNameFocusNode ??= FocusNode();
     _model.yourAgeController ??= TextEditingController();
+    _model.yourAgeFocusNode ??= FocusNode();
     _model.nationalityController ??= TextEditingController();
+    _model.nationalityFocusNode ??= FocusNode();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -242,6 +246,15 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -395,6 +408,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                   child: TextFormField(
                     controller: _model.yourNameController,
+                    focusNode: _model.yourNameFocusNode,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your Name',
@@ -445,6 +459,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                   child: TextFormField(
                     controller: _model.yourAgeController,
+                    focusNode: _model.yourAgeFocusNode,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your Age',
@@ -497,6 +512,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget>
                       EdgeInsetsDirectional.fromSTEB(20.0, 20.0, 20.0, 0.0),
                   child: TextFormField(
                     controller: _model.nationalityController,
+                    focusNode: _model.nationalityFocusNode,
                     obscureText: false,
                     decoration: InputDecoration(
                       labelText: 'Your Nationality',

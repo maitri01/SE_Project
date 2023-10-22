@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import '../../flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
@@ -22,7 +22,7 @@ class AssemblyAIGroup {
 class TranscriptCall {
   Future<ApiCallResponse> call({
     String? audioUrl = '',
-  }) {
+  }) async {
     final ffApiRequestBody = '''
 {
   "audio_url": "${audioUrl}"
@@ -53,7 +53,7 @@ class TranscriptCall {
 class GetTrancriptCall {
   Future<ApiCallResponse> call({
     String? id = '',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getTrancript',
       apiUrl: '${AssemblyAIGroup.baseUrl}/transcript/${id}',
@@ -71,10 +71,6 @@ class GetTrancriptCall {
     );
   }
 
-  dynamic id(dynamic response) => getJsonField(
-        response,
-        r'''$.id''',
-      );
   dynamic text(dynamic response) => getJsonField(
         response,
         r'''$.text''',
@@ -86,7 +82,7 @@ class GetTrancriptCall {
 class NasdaqStocksCall {
   static Future<ApiCallResponse> call({
     String? name = 'BDX',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'NASDAQ STOCKS',
       apiUrl: 'https://realstonks.p.rapidapi.com/${name}',
@@ -125,7 +121,7 @@ class NasdaqStocksCall {
 class TwelveOutCall {
   static Future<ApiCallResponse> call({
     String? symbol = 'AAPL',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'TWELVE OUT',
       apiUrl: 'https://twelve-data1.p.rapidapi.com/price',
@@ -155,7 +151,7 @@ class TwelveOutCall {
 class HistoricDataYahooCall {
   static Future<ApiCallResponse> call({
     String? name = 'AAPL',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'HISTORIC DATA YAHOO',
       apiUrl:
@@ -181,7 +177,7 @@ class HistoricDataYahooCall {
         r'''$.items..close''',
         true,
       );
-  static dynamic date(dynamic response) => getJsonField(
+  static dynamic data(dynamic response) => getJsonField(
         response,
         r'''$.items..date''',
         true,
@@ -198,10 +194,51 @@ class HistoricDataYahooCall {
       );
 }
 
+class HomepageHISTORICDATAYAHOOCall {
+  static Future<ApiCallResponse> call({
+    String? name = 'AAPL',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Homepage HISTORIC DATA YAHOO',
+      apiUrl:
+          'https://yahoo-finance15.p.rapidapi.com/api/yahoo/hi/history/${name}/1h',
+      callType: ApiCallType.GET,
+      headers: {
+        'X-RapidAPI-Key': 'f40ef21d0bmsh98428bce74b479ep12f80bjsn3b9d2aa1a891',
+        'X-RapidAPI-Host': 'yahoo-finance15.p.rapidapi.com',
+        'useQueryString': 'true',
+      },
+      params: {
+        'diffandsplits': false,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic high(dynamic response) => getJsonField(
+        response,
+        r'''$.items..high''',
+        true,
+      );
+  static dynamic low(dynamic response) => getJsonField(
+        response,
+        r'''$.items..low''',
+        true,
+      );
+  static dynamic volume(dynamic response) => getJsonField(
+        response,
+        r'''$.items..volume''',
+        true,
+      );
+}
+
 class AlphaVantageCall {
   static Future<ApiCallResponse> call({
     String? name = 'AAPL',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Alpha Vantage',
       apiUrl: 'https://alpha-vantage.p.rapidapi.com/query',
@@ -229,7 +266,7 @@ class AlphaVantageCall {
 class RsiCall {
   static Future<ApiCallResponse> call({
     String? name = 'AAPL',
-  }) {
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'RSI',
       apiUrl: 'https://alpha-vantage.p.rapidapi.com/query',
@@ -262,7 +299,7 @@ class RsiCall {
 }
 
 class NiftyCall {
-  static Future<ApiCallResponse> call() {
+  static Future<ApiCallResponse> call() async {
     return ApiManager.instance.makeApiCall(
       callName: 'NIFTY',
       apiUrl: 'https://latest-stock-price.p.rapidapi.com/price',
@@ -287,6 +324,70 @@ class NiftyCall {
         response,
         r'''$[0].lastPrice''',
         true,
+      );
+}
+
+class GptCall {
+  static Future<ApiCallResponse> call({
+    String? file = '',
+    String? model = '\"whisper-1\"',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GPT',
+      apiUrl:
+          'https://api.openai.com/v1/audio/transcriptions/file=@${file}/model=${model}',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Bearer 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',
+        'Content-Type': 'multipart/form-data',
+      },
+      params: {
+        'file': file,
+        'model': "\"whisper-1\"",
+      },
+      bodyType: BodyType.MULTIPART,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class DgCall {
+  static Future<ApiCallResponse> call({
+    String? url = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "data": "${url}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'DG',
+      apiUrl: 'https://api.deepgram.com/v1/listen',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Token 7b130cfaef959d52f5ee1ca8f578243419d65e23',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  static dynamic transcriptt(dynamic response) => getJsonField(
+        response,
+        r'''$.results.channels[:].alternatives[0].transcript''',
+      );
+  static dynamic error(dynamic response) => getJsonField(
+        response,
+        r'''$.err_msg''',
       );
 }
 

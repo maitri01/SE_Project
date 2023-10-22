@@ -100,6 +100,18 @@ class FFAppState extends ChangeNotifier {
   set firstwatchlistprice(String _value) {
     _firstwatchlistprice = _value;
   }
+
+  String _PATH = '';
+  String get PATH => _PATH;
+  set PATH(String _value) {
+    _PATH = _value;
+  }
+
+  int _pageindex = 0;
+  int get pageindex => _pageindex;
+  set pageindex(int _value) {
+    _pageindex = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

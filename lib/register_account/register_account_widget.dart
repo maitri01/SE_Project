@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -27,8 +28,11 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
     _model = createModel(context, () => RegisterAccountModel());
 
     _model.emailAddressController ??= TextEditingController();
+    _model.emailAddressFocusNode ??= FocusNode();
     _model.passwordCreateController ??= TextEditingController();
+    _model.passwordCreateFocusNode ??= FocusNode();
     _model.passwordConfirmController ??= TextEditingController();
+    _model.passwordConfirmFocusNode ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -41,6 +45,15 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -137,6 +150,7 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     0.0, 20.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.emailAddressController,
+                                  focusNode: _model.emailAddressFocusNode,
                                   obscureText: false,
                                   decoration: InputDecoration(
                                     labelText: 'Email Address',
@@ -195,6 +209,7 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     0.0, 12.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.passwordCreateController,
+                                  focusNode: _model.passwordCreateFocusNode,
                                   obscureText: !_model.passwordCreateVisibility,
                                   decoration: InputDecoration(
                                     labelText: 'Password',
@@ -269,6 +284,7 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     0.0, 12.0, 0.0, 0.0),
                                 child: TextFormField(
                                   controller: _model.passwordConfirmController,
+                                  focusNode: _model.passwordConfirmFocusNode,
                                   obscureText:
                                       !_model.passwordConfirmVisibility,
                                   decoration: InputDecoration(

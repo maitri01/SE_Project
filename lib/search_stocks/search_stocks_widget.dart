@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_audio_player.dart';
 import '/flutter_flow/flutter_flow_autocomplete_options_list.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,9 +9,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/permissions_util.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +54,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
     });
 
     _model.searchController ??= TextEditingController();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -62,6 +67,15 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -177,6 +191,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                       focusNode,
                                       onEditingComplete,
                                     ) {
+                                      _model.searchFocusNode = focusNode;
                                       _model.searchController =
                                           textEditingController;
                                       return TextFormField(
@@ -189,9 +204,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                           Duration(milliseconds: 0),
                                           () => setState(() {}),
                                         ),
-                                        autofocus: true,
                                         textCapitalization:
                                             TextCapitalization.characters,
+                                        textInputAction: TextInputAction.search,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Search...',
@@ -272,7 +287,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Lexend',
-                                              color: Colors.white,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               fontSize: 20.0,
                                               fontWeight: FontWeight.normal,
                                             ),
@@ -335,131 +352,6 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    4.0, 0.0, 4.0, 0.0),
-                                child: FutureBuilder<ApiCallResponse>(
-                                  future: AssemblyAIGroup.transcriptCall.call(
-                                    audioUrl: _model.audiopath,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 40.0,
-                                          height: 40.0,
-                                          child: SpinKitRipple(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 40.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    final micIconTranscriptResponse =
-                                        snapshot.data!;
-                                    return InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await requestPermission(
-                                            microphonePermission);
-                                        if (await getPermissionStatus(
-                                            microphonePermission)) {
-                                          _model.audioRecorder ??= Record();
-                                          if (await _model.audioRecorder!
-                                              .hasPermission()) {
-                                            await _model.audioRecorder!.start();
-                                          } else {
-                                            showSnackbar(
-                                              context,
-                                              'You have not provided permission to record audio.',
-                                            );
-                                          }
-                                        } else {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Can\'t Record',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Lexend',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                              ),
-                                              duration:
-                                                  Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
-                                        }
-
-                                        _model.audiopath =
-                                            await _model.audioRecorder?.stop();
-                                        _model.apiResultsoy =
-                                            await AssemblyAIGroup.transcriptCall
-                                                .call(
-                                          audioUrl: _model.audiopath,
-                                        );
-                                        if ((_model.apiResultsoy?.succeeded ??
-                                            true)) {
-                                          _model.apiResultggf =
-                                              await AssemblyAIGroup
-                                                  .getTrancriptCall
-                                                  .call(
-                                            id: AssemblyAIGroup.transcriptCall
-                                                .id(
-                                                  (_model.apiResultsoy
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                )
-                                                .toString(),
-                                          );
-                                          if ((_model.apiResultggf?.succeeded ??
-                                              true)) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  'hii',
-                                                  style: TextStyle(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
-                                                ),
-                                                duration: Duration(
-                                                    milliseconds: 4000),
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondary,
-                                              ),
-                                            );
-                                          }
-                                        }
-
-                                        setState(() {});
-                                      },
-                                      child: Icon(
-                                        Icons.mic_outlined,
-                                        color: FlutterFlowTheme.of(context)
-                                            .tertiary,
-                                        size: 40.0,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
                             ],
                           ),
                         ),
@@ -483,6 +375,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           if (FFAppState().ifsearchtextnull)
                             Padding(
@@ -490,6 +383,8 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                   0.0, 15.0, 0.0, 15.0),
                               child: Container(
                                 width: double.infinity,
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.55,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
@@ -564,7 +459,11 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                       BorderRadius.circular(
                                                           8.0),
                                                   child: Image.asset(
-                                                    'assets/images/download.png',
+                                                    Theme.of(context)
+                                                                .brightness ==
+                                                            Brightness.dark
+                                                        ? 'assets/images/download.png'
+                                                        : 'assets/images/download.png',
                                                     width: 40.0,
                                                     height: 40.0,
                                                     fit: BoxFit.cover,
@@ -591,7 +490,14 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                               .searchtext,
                                                           style: FlutterFlowTheme
                                                                   .of(context)
-                                                              .titleSmall,
+                                                              .titleSmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .customColor4,
+                                                              ),
                                                         ),
                                                       ],
                                                     ),
@@ -604,7 +510,11 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                       ],
                                     ),
                                     Column(
-                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Padding(
                                           padding:
@@ -646,7 +556,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 FFAppState().searchprice,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .titleSmall,
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .customColor4,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -670,7 +586,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 FFAppState().searchttotalvolume,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .titleSmall,
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .customColor4,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -690,12 +612,21 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .bodySmall,
                                               ),
-                                              Text(
-                                                FFAppState()
-                                                    .searchchangepercentage,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall,
+                                              Flexible(
+                                                child: Text(
+                                                  FFAppState()
+                                                      .searchchangepercentage,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Lexend',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .customColor4,
+                                                      ),
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -719,7 +650,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 FFAppState().searchchangepoint,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .titleSmall,
+                                                        .titleSmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .customColor4,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -727,7 +664,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 5.0, 16.0, 4.0),
+                                                  16.0, 15.0, 16.0, 4.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
                                               context.pushNamed(
@@ -776,26 +713,322 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                 ),
                               ),
                             ),
-                          FlutterFlowAudioPlayer(
-                            audio: Audio.network(
-                              'https://filesamples.com/samples/audio/mp3/sample3.mp3',
-                              metas: Metas(
-                                id: 'sample3.mp3-ce400d41',
-                              ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 10.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      4.0, 0.0, 4.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await requestPermission(
+                                          microphonePermission);
+                                      if (await getPermissionStatus(
+                                          microphonePermission)) {
+                                        _model.audioRecorder ??= Record();
+                                        if (await _model.audioRecorder!
+                                            .hasPermission()) {
+                                          await _model.audioRecorder!.start();
+                                        } else {
+                                          showSnackbar(
+                                            context,
+                                            'You have not provided permission to record audio.',
+                                          );
+                                        }
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'Can\'t Record',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Lexend',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                      ),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
+                                          ),
+                                        );
+                                        return;
+                                      }
+
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Recording Started!',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondary,
+                                        ),
+                                      );
+                                    },
+                                    child: Icon(
+                                      Icons.mic_outlined,
+                                      color:
+                                          FlutterFlowTheme.of(context).tertiary,
+                                      size: 40.0,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      4.0, 0.0, 4.0, 0.0),
+                                  child: FutureBuilder<ApiCallResponse>(
+                                    future: AssemblyAIGroup.transcriptCall.call(
+                                      audioUrl: _model.audiopath,
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 40.0,
+                                            height: 40.0,
+                                            child: SpinKitRipple(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              size: 40.0,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final micIconTranscriptResponse =
+                                          snapshot.data!;
+                                      return InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          var _shouldSetState = false;
+                                          _model.audiopath = await _model
+                                              .audioRecorder
+                                              ?.stop();
+                                          _shouldSetState = true;
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Recording Stopped',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryText,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondary,
+                                            ),
+                                          );
+                                          FFAppState().PATH = _model.audiopath!;
+
+                                          await currentUserReference!
+                                              .update(createUsersRecordData(
+                                            audiopath: FFAppState().PATH,
+                                          ));
+                                          _model.trancripttext =
+                                              await DgCall.call(
+                                            url: valueOrDefault(
+                                                currentUserDocument?.audiopath,
+                                                ''),
+                                          );
+                                          _shouldSetState = true;
+                                          await Future.delayed(const Duration(
+                                              milliseconds: 5000));
+                                          if ((_model
+                                                  .trancripttext?.succeeded ??
+                                              true)) {
+                                            setState(() {
+                                              FFAppState().searchtext =
+                                                  DgCall.transcriptt(
+                                                (_model.trancripttext
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ).toString();
+                                            });
+                                            setState(() {
+                                              FFAppState().ifsearchtextnull =
+                                                  true;
+                                            });
+                                            _model.nasdaqapiResult =
+                                                await NasdaqStocksCall.call(
+                                              name: FFAppState().searchtext,
+                                            );
+                                            _shouldSetState = true;
+                                            FFAppState().searchprice =
+                                                NasdaqStocksCall.price(
+                                              (_model.nasdaqapiResult
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            ).toString();
+                                            FFAppState()
+                                                    .searchchangepercentage =
+                                                NasdaqStocksCall
+                                                    .changepercentage(
+                                              (_model.nasdaqapiResul
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            ).toString();
+                                            FFAppState().searchttotalvolume =
+                                                NasdaqStocksCall.totalvolume(
+                                              (_model.nasdaqapiResul
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            ).toString();
+                                            setState(() {
+                                              FFAppState().searchchangepoint =
+                                                  NasdaqStocksCall.changepoint(
+                                                (_model.nasdaqapiResul
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ).toString();
+                                            });
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'Analysis',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          } else {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  'API failed',
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 1000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                  valueOrDefault<String>(
+                                                    DgCall.error(
+                                                      (_model.trancripttext
+                                                              ?.jsonBody ??
+                                                          ''),
+                                                    ).toString(),
+                                                    'API Failed',
+                                                  ),
+                                                  style: TextStyle(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
+                                                ),
+                                                duration: Duration(
+                                                    milliseconds: 4000),
+                                                backgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondary,
+                                              ),
+                                            );
+                                            if (_shouldSetState)
+                                              setState(() {});
+                                            return;
+                                          }
+
+                                          if (_shouldSetState) setState(() {});
+                                        },
+                                        child: Icon(
+                                          Icons.mic_off,
+                                          color: FlutterFlowTheme.of(context)
+                                              .tertiary,
+                                          size: 40.0,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
                             ),
-                            titleTextStyle:
-                                FlutterFlowTheme.of(context).titleLarge,
-                            playbackDurationTextStyle:
-                                FlutterFlowTheme.of(context).labelMedium,
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            playbackButtonColor:
-                                FlutterFlowTheme.of(context).primary,
-                            activeTrackColor:
-                                FlutterFlowTheme.of(context).alternate,
-                            elevation: 4.0,
-                            playInBackground:
-                                PlayInBackground.disabledRestoreOnForeground,
+                          ),
+                          Flexible(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FlutterFlowAudioPlayer(
+                                  audio: Audio.network(
+                                    valueOrDefault<String>(
+                                      _model.audiopath,
+                                      'https://filesamples.com/samples/audio/mp3/sample3.mp3',
+                                    ),
+                                    metas: Metas(
+                                      id: 'sample3.mp3-9c26259a',
+                                    ),
+                                  ),
+                                  titleTextStyle:
+                                      FlutterFlowTheme.of(context).titleLarge,
+                                  playbackDurationTextStyle:
+                                      FlutterFlowTheme.of(context).labelMedium,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  playbackButtonColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  activeTrackColor:
+                                      FlutterFlowTheme.of(context).alternate,
+                                  elevation: 4.0,
+                                  playInBackground: PlayInBackground
+                                      .disabledRestoreOnForeground,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,12 +52,19 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
     _model = createModel(context, () => PortfolioFormModel());
 
     _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
     _model.textController2 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
     _model.textController3 ??= TextEditingController();
+    _model.textFieldFocusNode3 ??= FocusNode();
     _model.textController4 ??= TextEditingController();
+    _model.textFieldFocusNode4 ??= FocusNode();
     _model.textController5 ??= TextEditingController();
+    _model.textFieldFocusNode5 ??= FocusNode();
     _model.textController6 ??= TextEditingController();
+    _model.textFieldFocusNode6 ??= FocusNode();
     _model.textController7 ??= TextEditingController();
+    _model.textFieldFocusNode7 ??= FocusNode();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -69,6 +77,15 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (isiOS) {
+      SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(
+          statusBarBrightness: Theme.of(context).brightness,
+          systemStatusBarContrastEnforced: true,
+        ),
+      );
+    }
+
     context.watch<FFAppState>();
 
     return Scaffold(
@@ -113,6 +130,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController1,
+                    focusNode: _model.textFieldFocusNode1,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -170,6 +188,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController2,
+                    focusNode: _model.textFieldFocusNode2,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -226,6 +245,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController3,
+                    focusNode: _model.textFieldFocusNode3,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -282,6 +302,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController4,
+                    focusNode: _model.textFieldFocusNode4,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -363,7 +384,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      color: FlutterFlowTheme.of(context).slateBlue,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Lexend',
@@ -381,6 +402,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController5,
+                    focusNode: _model.textFieldFocusNode5,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -437,6 +459,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController6,
+                    focusNode: _model.textFieldFocusNode6,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -493,6 +516,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: TextFormField(
                     controller: _model.textController7,
+                    focusNode: _model.textFieldFocusNode7,
                     autofocus: true,
                     obscureText: false,
                     decoration: InputDecoration(
@@ -614,7 +638,7 @@ class _PortfolioFormWidgetState extends State<PortfolioFormWidget> {
                   child: FlutterFlowWebView(
                     content: 'https://www.cre8ivedesigner.com/disclaimer',
                     bypass: false,
-                    height: 200.0,
+                    height: 246.0,
                     verticalScroll: true,
                     horizontalScroll: false,
                   ),

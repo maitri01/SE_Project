@@ -11,6 +11,7 @@ import 'complete_profile_widget.dart' show CompleteProfileWidget;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,12 +27,15 @@ class CompleteProfileModel extends FlutterFlowModel<CompleteProfileWidget> {
   String uploadedFileUrl = '';
 
   // State field(s) for yourName widget.
+  FocusNode? yourNameFocusNode;
   TextEditingController? yourNameController;
   String? Function(BuildContext, String?)? yourNameControllerValidator;
   // State field(s) for yourAge widget.
+  FocusNode? yourAgeFocusNode;
   TextEditingController? yourAgeController;
   String? Function(BuildContext, String?)? yourAgeControllerValidator;
   // State field(s) for Nationality widget.
+  FocusNode? nationalityFocusNode;
   TextEditingController? nationalityController;
   String? Function(BuildContext, String?)? nationalityControllerValidator;
 
@@ -40,8 +44,13 @@ class CompleteProfileModel extends FlutterFlowModel<CompleteProfileWidget> {
   void initState(BuildContext context) {}
 
   void dispose() {
+    yourNameFocusNode?.dispose();
     yourNameController?.dispose();
+
+    yourAgeFocusNode?.dispose();
     yourAgeController?.dispose();
+
+    nationalityFocusNode?.dispose();
     nationalityController?.dispose();
   }
 

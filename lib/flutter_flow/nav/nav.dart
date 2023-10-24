@@ -89,9 +89,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? NavBarPage() : LoginPageWidget(),
           routes: [
             FFRoute(
-              name: 'registerAccount',
-              path: 'registerAccount',
-              builder: (context, params) => RegisterAccountWidget(),
+              name: 'completeProfile',
+              path: 'completeProfile',
+              builder: (context, params) => CompleteProfileWidget(),
             ),
             FFRoute(
               name: 'loginPage',
@@ -99,16 +99,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => LoginPageWidget(),
             ),
             FFRoute(
-              name: 'completeProfile',
-              path: 'completeProfile',
-              builder: (context, params) => CompleteProfileWidget(),
-            ),
-            FFRoute(
               name: 'forgotPassword',
               path: 'forgotPassword',
               builder: (context, params) => ForgotPasswordWidget(
                 email: params.getParam('email', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'registerAccount',
+              path: 'registerAccount',
+              builder: (context, params) => RegisterAccountWidget(),
             ),
             FFRoute(
               name: 'MY_profilePage',

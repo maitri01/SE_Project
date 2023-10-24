@@ -82,7 +82,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -91,7 +91,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
           buttonSize: 60.0,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: Colors.white,
+            color: FlutterFlowTheme.of(context).accent1,
             size: 30.0,
           ),
           onPressed: () async {
@@ -100,7 +100,10 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
         ),
         title: Text(
           'Search Stocks',
-          style: FlutterFlowTheme.of(context).displaySmall,
+          style: FlutterFlowTheme.of(context).displaySmall.override(
+                fontFamily: 'Lexend',
+                color: FlutterFlowTheme.of(context).secondaryText,
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -210,19 +213,22 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           hintText: 'Search...',
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Lexend',
-                                                    color: Colors.white,
-                                                    fontSize: 14.0,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Lexend',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
                                               width: 1.0,
                                             ),
                                             borderRadius:
@@ -233,7 +239,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .accent1,
                                               width: 1.0,
                                             ),
                                             borderRadius:
@@ -244,7 +252,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                           ),
                                           errorBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 1.0,
                                             ),
                                             borderRadius:
@@ -256,7 +266,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                           focusedErrorBorder:
                                               UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .error,
                                               width: 1.0,
                                             ),
                                             borderRadius:
@@ -293,6 +305,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                               fontSize: 20.0,
                                               fontWeight: FontWeight.normal,
                                             ),
+                                        cursorColor:
+                                            FlutterFlowTheme.of(context)
+                                                .accent1,
                                         validator: _model
                                             .searchControllerValidator
                                             .asValidator(context),
@@ -437,13 +452,10 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                           height: 60.0,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
+                                                .secondaryText,
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             border: Border.all(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
                                               width: 2.0,
                                             ),
                                           ),
@@ -459,11 +471,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                       BorderRadius.circular(
                                                           8.0),
                                                   child: Image.asset(
-                                                    Theme.of(context)
-                                                                .brightness ==
-                                                            Brightness.dark
-                                                        ? 'assets/images/download.png'
-                                                        : 'assets/images/download.png',
+                                                    'assets/images/download.png',
                                                     width: 40.0,
                                                     height: 40.0,
                                                     fit: BoxFit.cover,
@@ -496,7 +504,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                                     'Lexend',
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .customColor4,
+                                                                    .primaryBackground,
                                                               ),
                                                         ),
                                                       ],
@@ -550,7 +558,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 'Price (USD - \$)',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodySmall,
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
                                               ),
                                               Text(
                                                 FFAppState().searchprice,
@@ -580,7 +594,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 'Total Volume',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodySmall,
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
                                               ),
                                               Text(
                                                 FFAppState().searchttotalvolume,
@@ -610,7 +630,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 'Change Percentage (in %)',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodySmall,
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
                                               ),
                                               Flexible(
                                                 child: Text(
@@ -644,7 +670,13 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                 'Change Point',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodySmall,
+                                                        .bodySmall
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
                                               ),
                                               Text(
                                                 FFAppState().searchchangepoint,
@@ -690,13 +722,15 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primary,
+                                                      .secondaryText,
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall
                                                       .override(
                                                         fontFamily: 'Lexend',
-                                                        color: Colors.white,
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
                                                         fontSize: 20.0,
                                                       ),
                                               elevation: 2.0,
@@ -792,7 +826,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                     child: Icon(
                                       Icons.mic_outlined,
                                       color:
-                                          FlutterFlowTheme.of(context).tertiary,
+                                          FlutterFlowTheme.of(context).accent1,
                                       size: 40.0,
                                     ),
                                   ),
@@ -989,7 +1023,7 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                         child: Icon(
                                           Icons.mic_off,
                                           color: FlutterFlowTheme.of(context)
-                                              .tertiary,
+                                              .accent1,
                                           size: 40.0,
                                         ),
                                       );
@@ -1020,9 +1054,9 @@ class _SearchStocksWidgetState extends State<SearchStocksWidget> {
                                   fillColor: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                   playbackButtonColor:
-                                      FlutterFlowTheme.of(context).primary,
+                                      FlutterFlowTheme.of(context).accent1,
                                   activeTrackColor:
-                                      FlutterFlowTheme.of(context).alternate,
+                                      FlutterFlowTheme.of(context).accent1,
                                   elevation: 4.0,
                                   playInBackground: PlayInBackground
                                       .disabledRestoreOnForeground,

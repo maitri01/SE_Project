@@ -118,13 +118,13 @@ class _HomePageWidgetState extends State<HomePageWidget>
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
             title: Text(
               'Dashboard',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Lexend',
-                    color: Colors.white,
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     fontSize: 22.0,
                   ),
             ),
@@ -247,7 +247,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                           fontFamily: 'Lexend',
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primary,
+                                                              .primaryText,
                                                         ),
                                                   ),
                                                 ),
@@ -315,7 +315,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .primaryText,
                                                         fontSize: 25.0,
                                                         fontWeight:
                                                             FontWeight.normal,
@@ -452,6 +452,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Lexend',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                         fontSize: 30.0,
                                                         fontWeight:
                                                             FontWeight.normal,
@@ -479,7 +483,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .success,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -494,7 +498,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .error,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -508,7 +512,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .warning,
                                                         size: 55.0,
                                                       ),
                                                     ],
@@ -642,6 +646,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -668,6 +675,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -694,6 +704,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -736,6 +749,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Lexend',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                         fontSize: 30.0,
                                                         fontWeight:
                                                             FontWeight.normal,
@@ -763,7 +780,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .success,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -778,7 +795,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .error,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -792,7 +809,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .warning,
                                                         size: 55.0,
                                                       ),
                                                     ],
@@ -926,6 +943,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -952,6 +972,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -978,6 +1001,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1020,6 +1046,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Lexend',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                         fontSize: 30.0,
                                                         fontWeight:
                                                             FontWeight.normal,
@@ -1047,7 +1077,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .success,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -1062,7 +1092,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .error,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -1076,7 +1106,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .warning,
                                                         size: 55.0,
                                                       ),
                                                     ],
@@ -1210,6 +1240,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1236,6 +1269,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1262,6 +1298,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1588,6 +1627,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Lexend',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText,
                                                         fontSize: 30.0,
                                                         fontWeight:
                                                             FontWeight.normal,
@@ -1615,7 +1658,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .success,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -1630,7 +1673,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .error,
                                                         size: 80.0,
                                                       ),
                                                     ],
@@ -1644,7 +1687,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .secondaryText,
+                                                                .warning,
                                                         size: 55.0,
                                                       ),
                                                     ],
@@ -1778,6 +1821,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1804,6 +1850,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1830,6 +1879,9 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                                               .override(
                                                                 fontFamily:
                                                                     'Lexend',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
                                                                 fontSize: 11.0,
                                                               ),
                                                         ),
@@ -1872,10 +1924,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                         dotWidth: 16.0,
                                         dotHeight: 8.0,
                                         dotColor: FlutterFlowTheme.of(context)
-                                            .accent1,
+                                            .secondaryText,
                                         activeDotColor:
                                             FlutterFlowTheme.of(context)
-                                                .primary,
+                                                .accent1,
                                         paintStyle: PaintingStyle.fill,
                                       ),
                                     ),
@@ -1918,7 +1970,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                     .override(
                                       fontFamily: 'Lexend',
                                       color: FlutterFlowTheme.of(context)
-                                          .customColor4,
+                                          .secondaryText,
                                     ),
                               ),
                             ),
@@ -1955,7 +2007,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                                               fontFamily: 'Lexend',
                                               color:
                                                   FlutterFlowTheme.of(context)
-                                                      .primary,
+                                                      .accent1,
                                               fontSize: 12.0,
                                               fontWeight: FontWeight.normal,
                                               decoration:

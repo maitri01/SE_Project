@@ -78,7 +78,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -87,7 +87,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
               buttonSize: 60.0,
               icon: Icon(
                 Icons.arrow_back_rounded,
-                color: Colors.white,
+                color: FlutterFlowTheme.of(context).accent1,
                 size: 30.0,
               ),
               onPressed: () async {
@@ -98,7 +98,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
               'Analysis',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Lexend',
-                    color: Colors.white,
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     fontSize: 22.0,
                   ),
             ),
@@ -123,7 +123,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                           .headlineSmall
                           .override(
                             fontFamily: 'Lexend',
-                            color: FlutterFlowTheme.of(context).customColor4,
+                            color: FlutterFlowTheme.of(context).secondaryText,
                             fontSize: 25.0,
                           ),
                     ),
@@ -166,13 +166,13 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                                       chartsHistoricDataYahooResponse.jsonBody,
                                     )!,
                                     settings: LineChartBarData(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
                                       barWidth: 2.0,
                                       belowBarData: BarAreaData(
                                         show: true,
                                         color: FlutterFlowTheme.of(context)
-                                            .tropicalIndigo,
+                                            .accent1,
                                       ),
                                     ),
                                   )
@@ -188,7 +188,8 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                                 xAxisLabelInfo: AxisLabelInfo(
                                   title: 'Date',
                                   titleTextStyle: TextStyle(
-                                    color: Color(0xFF0F0F0F),
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
                                     fontSize: 14.0,
                                   ),
                                 ),
@@ -197,7 +198,7 @@ class _ChartsWidgetState extends State<ChartsWidget> {
                                   titleTextStyle: GoogleFonts.getFont(
                                     'Lexend',
                                     color: FlutterFlowTheme.of(context)
-                                        .primaryText,
+                                        .secondaryText,
                                     fontSize: 14.0,
                                   ),
                                   showLabels: true,

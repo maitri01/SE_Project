@@ -68,13 +68,16 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
           },
           child: Icon(
             Icons.chevron_left_rounded,
-            color: FlutterFlowTheme.of(context).grayLight,
+            color: FlutterFlowTheme.of(context).accent1,
             size: 32.0,
           ),
         ),
         title: Text(
           'Change Password',
-          style: FlutterFlowTheme.of(context).headlineSmall,
+          style: FlutterFlowTheme.of(context).headlineSmall.override(
+                fontFamily: 'Lexend',
+                color: FlutterFlowTheme.of(context).secondaryText,
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -84,12 +87,7 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
         width: MediaQuery.sizeOf(context).width * 1.0,
         height: MediaQuery.sizeOf(context).height * 1.0,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fitWidth,
-            image: Image.asset(
-              'assets/images/login_bg@2x.png',
-            ).image,
-          ),
+          color: FlutterFlowTheme.of(context).primaryBackground,
         ),
         child: StreamBuilder<UsersRecord>(
           stream: UsersRecord.getDocument(currentUserReference!),
@@ -142,28 +140,28 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                       hintStyle: FlutterFlowTheme.of(context).bodySmall,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: FlutterFlowTheme.of(context).alternate,
+                          color: FlutterFlowTheme.of(context).accent1,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0x00000000),
+                          color: FlutterFlowTheme.of(context).accent3,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0x00000000),
+                          color: FlutterFlowTheme.of(context).error,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Color(0x00000000),
+                          color: FlutterFlowTheme.of(context).error,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
@@ -206,12 +204,14 @@ class _ChangePasswordWidgetState extends State<ChangePasswordWidget> {
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lexend',
-                                color: FlutterFlowTheme.of(context).textColor,
-                              ),
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Lexend',
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
                       elevation: 3.0,
                       borderSide: BorderSide(
                         color: Colors.transparent,

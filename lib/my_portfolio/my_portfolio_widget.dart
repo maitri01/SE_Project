@@ -190,7 +190,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primary,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         leading: FlutterFlowIconButton(
           borderColor: Colors.transparent,
@@ -199,7 +199,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
           buttonSize: 60.0,
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: Colors.white,
+            color: FlutterFlowTheme.of(context).accent1,
             size: 30.0,
           ),
           onPressed: () async {
@@ -208,7 +208,10 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
         ),
         title: Text(
           'My Portfolio',
-          style: FlutterFlowTheme.of(context).displaySmall,
+          style: FlutterFlowTheme.of(context).displaySmall.override(
+                fontFamily: 'Lexend',
+                color: FlutterFlowTheme.of(context).secondaryText,
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -256,7 +259,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                                                 fontFamily: 'Lexend',
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                        .secondaryText,
                                               ),
                                         ),
                                       ],
@@ -335,7 +338,7 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                                                 fontFamily: 'Lexend',
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .primary,
+                                                        .secondaryText,
                                               ),
                                         ),
                                       ],
@@ -548,7 +551,12 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                                     child: Text(
                                       'BO ID',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                          ),
                                     ),
                                   ),
                                 ],
@@ -599,7 +607,12 @@ class _MyPortfolioWidgetState extends State<MyPortfolioWidget>
                                     child: Text(
                                       'Stocks Owned',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Lexend',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                          ),
                                     ),
                                   ),
                                 ],

@@ -70,12 +70,6 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                 height: MediaQuery.sizeOf(context).height * 1.0,
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.of(context).primaryBackground,
-                  image: DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: Image.asset(
-                      'assets/images/createAccount_bg@2x.png',
-                    ).image,
-                  ),
                   shape: BoxShape.rectangle,
                 ),
                 child: Padding(
@@ -90,21 +84,12 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            if (Theme.of(context).brightness == Brightness.dark)
-                              Image.asset(
-                                'assets/images/image-removebg-preview.png',
-                                width: 92.3,
-                                height: 60.0,
-                                fit: BoxFit.fitWidth,
-                              ),
-                            if (!(Theme.of(context).brightness ==
-                                Brightness.dark))
-                              Image.asset(
-                                'assets/images/image-removebg-preview.png',
-                                width: 92.3,
-                                height: 60.0,
-                                fit: BoxFit.fitWidth,
-                              ),
+                            Image.asset(
+                              'assets/images/image-removebg-preview.png',
+                              width: 92.3,
+                              height: 60.0,
+                              fit: BoxFit.fitWidth,
+                            ),
                           ],
                         ),
                       ),
@@ -169,7 +154,8 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     ),
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: Color(0xFF34F6F2),
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent3,
                                         width: 1.0,
                                       ),
                                       borderRadius: BorderRadius.circular(8.0),
@@ -272,8 +258,13 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                       ),
                                     ),
                                   ),
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Lexend',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                      ),
                                   validator: _model
                                       .passwordCreateControllerValidator
                                       .asValidator(context),
@@ -292,8 +283,13 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     labelStyle:
                                         FlutterFlowTheme.of(context).bodySmall,
                                     hintText: 'Enter your password...',
-                                    hintStyle:
-                                        FlutterFlowTheme.of(context).bodySmall,
+                                    hintStyle: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Lexend',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                        ),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                         color: FlutterFlowTheme.of(context)
@@ -396,17 +392,16 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                     iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                                        .secondaryText,
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
                                           fontFamily: 'Lexend',
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
+                                              .primaryBackground,
                                         ),
                                     elevation: 3.0,
                                     borderSide: BorderSide(
-                                      color: Colors.transparent,
                                       width: 1.0,
                                     ),
                                     borderRadius: BorderRadius.circular(30.0),
@@ -422,7 +417,7 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                   children: [
                                     Material(
                                       color: Colors.transparent,
-                                      elevation: 3.0,
+                                      elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
@@ -434,7 +429,7 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                         height: 44.0,
                                         decoration: BoxDecoration(
                                           color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                              .primaryBackground,
                                           borderRadius:
                                               BorderRadius.circular(8.0),
                                           shape: BoxShape.rectangle,
@@ -497,7 +492,13 @@ class _RegisterAccountWidgetState extends State<RegisterAccountWidget> {
                                                 'Already have an account?',
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Lexend',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                        ),
                                               ),
                                             ],
                                           ),

@@ -85,7 +85,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: SizedBox(
                 width: 40.0,
@@ -101,9 +101,9 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
         final mYProfilePageUsersRecord = snapshot.data!;
         return Scaffold(
           key: scaffoldKey,
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -112,7 +112,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
               buttonSize: 60.0,
               icon: Icon(
                 Icons.arrow_back_rounded,
-                color: Colors.white,
+                color: FlutterFlowTheme.of(context).accent1,
                 size: 30.0,
               ),
               onPressed: () async {
@@ -123,7 +123,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
               'Profile',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Lexend',
-                    color: Colors.white,
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     fontSize: 22.0,
                   ),
             ),
@@ -147,7 +147,10 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                       )
                     ],
                     gradient: LinearGradient(
-                      colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                      colors: [
+                        FlutterFlowTheme.of(context).secondaryText,
+                        FlutterFlowTheme.of(context).accent1
+                      ],
                       stops: [0.0, 1.0],
                       begin: AlignmentDirectional(0.94, -1.0),
                       end: AlignmentDirectional(-0.94, 1.0),
@@ -171,7 +174,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                 alignment: AlignmentDirectional(0.00, 0.00),
                                 child: Card(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  color: FlutterFlowTheme.of(context).primary,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   elevation: 2.0,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(40.0),
@@ -239,7 +243,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                             width: 44.0,
                                             height: 44.0,
                                             decoration: BoxDecoration(
-                                              color: Color(0x40000000),
+                                              color: Colors.transparent,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 4.0,
@@ -254,11 +258,12 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                               borderColor: Colors.transparent,
                                               borderRadius: 30.0,
                                               buttonSize: 46.0,
+                                              fillColor: Color(0x00FFFFFF),
                                               icon: Icon(
                                                 Icons.login_rounded,
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .textColor,
+                                                        .secondaryBackground,
                                                 size: 24.0,
                                               ),
                                               onPressed: () async {
@@ -298,7 +303,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                     .override(
                                       fontFamily: 'Lexend',
                                       color: FlutterFlowTheme.of(context)
-                                          .textColor,
+                                          .primaryBackground,
                                     ),
                               ),
                             ],
@@ -319,7 +324,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Lexend',
-                                      color: Color(0xB3FFFFFF),
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
                                       fontWeight: FontWeight.w500,
                                     ),
                               ),
@@ -334,7 +340,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                     .override(
                                       fontFamily: 'Lexend',
                                       color: FlutterFlowTheme.of(context)
-                                          .textColor,
+                                          .secondaryBackground,
                                       fontWeight: FontWeight.w500,
                                     ),
                               ),
@@ -393,12 +399,12 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                           width: MediaQuery.sizeOf(context).width * 0.9,
                           height: 60.0,
                           decoration: BoxDecoration(
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                             borderRadius: BorderRadius.circular(8.0),
                             border: Border.all(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 2.0,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              width: 0.0,
                             ),
                           ),
                           child: Padding(
@@ -410,8 +416,13 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                               children: [
                                 Text(
                                   'Edit Profile',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Lexend',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                      ),
                                 ),
                                 FlutterFlowIconButton(
                                   borderColor: Colors.transparent,
@@ -419,7 +430,7 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                   buttonSize: 46.0,
                                   icon: Icon(
                                     Icons.chevron_right_rounded,
-                                    color: Color(0xFF95A1AC),
+                                    color: FlutterFlowTheme.of(context).accent1,
                                     size: 20.0,
                                   ),
                                   onPressed: () {
@@ -459,11 +470,12 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                             height: 60.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                width: 0.0,
                               ),
                             ),
                             child: Padding(
@@ -476,8 +488,13 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                 children: [
                                   Text(
                                     'Change Password',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lexend',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                        ),
                                   ),
                                   FlutterFlowIconButton(
                                     borderColor: Colors.transparent,
@@ -485,7 +502,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                     buttonSize: 46.0,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color:
+                                          FlutterFlowTheme.of(context).accent1,
                                       size: 20.0,
                                     ),
                                     onPressed: () {
@@ -526,11 +544,12 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                             height: 60.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                width: 0.0,
                               ),
                             ),
                             child: Padding(
@@ -543,8 +562,13 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                 children: [
                                   Text(
                                     'Notification Settings',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lexend',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                        ),
                                   ),
                                   FlutterFlowIconButton(
                                     borderColor: Colors.transparent,
@@ -552,7 +576,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                     buttonSize: 46.0,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color:
+                                          FlutterFlowTheme.of(context).accent1,
                                       size: 20.0,
                                     ),
                                     onPressed: () {
@@ -593,11 +618,19 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                             height: 60.0,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.of(context)
-                                  .primaryBackground,
+                                  .secondaryBackground,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4.0,
+                                  color: Color(0x33000000),
+                                  offset: Offset(0.0, 2.0),
+                                )
+                              ],
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: FlutterFlowTheme.of(context).alternate,
-                                width: 2.0,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                width: 0.0,
                               ),
                             ),
                             child: Padding(
@@ -610,8 +643,13 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                 children: [
                                   Text(
                                     'Privacy Policy',
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyMedium,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Lexend',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                        ),
                                   ),
                                   FlutterFlowIconButton(
                                     borderColor: Colors.transparent,
@@ -619,7 +657,8 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                                     buttonSize: 46.0,
                                     icon: Icon(
                                       Icons.chevron_right_rounded,
-                                      color: Color(0xFF95A1AC),
+                                      color:
+                                          FlutterFlowTheme.of(context).accent1,
                                       size: 20.0,
                                     ),
                                     onPressed: () {
@@ -635,68 +674,6 @@ class _MYProfilePageWidgetState extends State<MYProfilePageWidget>
                     ],
                   ),
                 ),
-                if (!(Theme.of(context).brightness == Brightness.dark))
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        setDarkModeSetting(context, ThemeMode.dark);
-                      },
-                      text: 'Dark Mode',
-                      options: FFButtonOptions(
-                        width: 130.0,
-                        height: 40.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).secondary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Lexend',
-                                  color: Colors.white,
-                                ),
-                        elevation: 2.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                if (Theme.of(context).brightness == Brightness.dark)
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        setDarkModeSetting(context, ThemeMode.light);
-                      },
-                      text: 'Light Mode',
-                      options: FFButtonOptions(
-                        width: 130.0,
-                        height: 40.0,
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).secondary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Lexend',
-                                  color: Colors.white,
-                                ),
-                        elevation: 2.0,
-                        borderSide: BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
               ],
             ),
           ),

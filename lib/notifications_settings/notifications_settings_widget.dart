@@ -69,13 +69,16 @@ class _NotificationsSettingsWidgetState
           },
           child: Icon(
             Icons.chevron_left_rounded,
-            color: FlutterFlowTheme.of(context).grayLight,
+            color: FlutterFlowTheme.of(context).accent1,
             size: 32.0,
           ),
         ),
         title: Text(
           'Notifications',
-          style: FlutterFlowTheme.of(context).headlineSmall,
+          style: FlutterFlowTheme.of(context).headlineSmall.override(
+                fontFamily: 'Lexend',
+                color: FlutterFlowTheme.of(context).secondaryText,
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -85,12 +88,7 @@ class _NotificationsSettingsWidgetState
         width: MediaQuery.sizeOf(context).width * 1.0,
         height: MediaQuery.sizeOf(context).height * 1.0,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.fitWidth,
-            image: Image.asset(
-              'assets/images/login_bg@2x.png',
-            ).image,
-          ),
+          color: FlutterFlowTheme.of(context).primaryBackground,
         ),
         child: StreamBuilder<UsersRecord>(
           stream: UsersRecord.getDocument(currentUserReference!),
@@ -135,15 +133,24 @@ class _NotificationsSettingsWidgetState
                     },
                     title: Text(
                       'Push Notifications',
-                      style: FlutterFlowTheme.of(context).headlineSmall,
+                      style: FlutterFlowTheme.of(context)
+                          .headlineSmall
+                          .override(
+                            fontFamily: 'Lexend',
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                          ),
                     ),
                     subtitle: Text(
                       'Receive Push notifications from our application on a semi regular basis.',
-                      style: FlutterFlowTheme.of(context).bodySmall,
+                      style: FlutterFlowTheme.of(context).bodySmall.override(
+                            fontFamily: 'Lexend',
+                            color: FlutterFlowTheme.of(context).primaryText,
+                          ),
                     ),
                     tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                    activeColor: FlutterFlowTheme.of(context).tertiary,
-                    activeTrackColor: FlutterFlowTheme.of(context).primary,
+                    activeColor: FlutterFlowTheme.of(context).accent1,
+                    activeTrackColor:
+                        FlutterFlowTheme.of(context).secondaryText,
                     dense: false,
                     controlAffinity: ListTileControlAffinity.trailing,
                     contentPadding:
@@ -157,15 +164,21 @@ class _NotificationsSettingsWidgetState
                   },
                   title: Text(
                     'Email Notifications',
-                    style: FlutterFlowTheme.of(context).headlineSmall,
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Lexend',
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
                   ),
                   subtitle: Text(
                     'Receive email notifications from our marketing team about new features.',
-                    style: FlutterFlowTheme.of(context).bodySmall,
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Lexend',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                        ),
                   ),
                   tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  activeColor: FlutterFlowTheme.of(context).tertiary,
-                  activeTrackColor: FlutterFlowTheme.of(context).primary,
+                  activeColor: FlutterFlowTheme.of(context).accent1,
+                  activeTrackColor: FlutterFlowTheme.of(context).secondaryText,
                   dense: false,
                   controlAffinity: ListTileControlAffinity.trailing,
                   contentPadding:
@@ -178,15 +191,21 @@ class _NotificationsSettingsWidgetState
                   },
                   title: Text(
                     'Location Services',
-                    style: FlutterFlowTheme.of(context).headlineSmall,
+                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                          fontFamily: 'Lexend',
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                        ),
                   ),
                   subtitle: Text(
                     'Allow us to track your location, this helps keep track of spending and keeps you safe.',
-                    style: FlutterFlowTheme.of(context).bodySmall,
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Lexend',
+                          color: FlutterFlowTheme.of(context).primaryText,
+                        ),
                   ),
                   tileColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  activeColor: FlutterFlowTheme.of(context).tertiary,
-                  activeTrackColor: FlutterFlowTheme.of(context).primary,
+                  activeColor: FlutterFlowTheme.of(context).accent1,
+                  activeTrackColor: FlutterFlowTheme.of(context).secondaryText,
                   dense: false,
                   controlAffinity: ListTileControlAffinity.trailing,
                   contentPadding:
@@ -206,12 +225,14 @@ class _NotificationsSettingsWidgetState
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Lexend',
-                                color: FlutterFlowTheme.of(context).textColor,
-                              ),
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .titleSmall
+                          .override(
+                            fontFamily: 'Lexend',
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
+                          ),
                       elevation: 3.0,
                       borderSide: BorderSide(
                         color: Colors.transparent,

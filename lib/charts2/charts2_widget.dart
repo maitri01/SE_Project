@@ -78,7 +78,7 @@ class _Charts2WidgetState extends State<Charts2Widget> {
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
+            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             automaticallyImplyLeading: false,
             leading: FlutterFlowIconButton(
               borderColor: Colors.transparent,
@@ -87,7 +87,7 @@ class _Charts2WidgetState extends State<Charts2Widget> {
               buttonSize: 60.0,
               icon: Icon(
                 Icons.arrow_back_rounded,
-                color: Colors.white,
+                color: FlutterFlowTheme.of(context).accent1,
                 size: 30.0,
               ),
               onPressed: () async {
@@ -98,7 +98,7 @@ class _Charts2WidgetState extends State<Charts2Widget> {
               'Analysis',
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Lexend',
-                    color: Colors.white,
+                    color: FlutterFlowTheme.of(context).secondaryText,
                     fontSize: 22.0,
                   ),
             ),
@@ -125,7 +125,10 @@ class _Charts2WidgetState extends State<Charts2Widget> {
                           )
                         ],
                         gradient: LinearGradient(
-                          colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                          colors: [
+                            FlutterFlowTheme.of(context).secondaryText,
+                            FlutterFlowTheme.of(context).accent1
+                          ],
                           stops: [0.0, 1.0],
                           begin: AlignmentDirectional(0.94, -1.0),
                           end: AlignmentDirectional(-0.94, 1.0),
@@ -154,7 +157,7 @@ class _Charts2WidgetState extends State<Charts2Widget> {
                                         .override(
                                           fontFamily: 'Lexend',
                                           color: FlutterFlowTheme.of(context)
-                                              .textColor,
+                                              .primaryBackground,
                                           fontSize: 25.0,
                                         ),
                                   ),
@@ -181,8 +184,8 @@ class _Charts2WidgetState extends State<Charts2Widget> {
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: MediaQuery.sizeOf(context).height * 1.0,
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                            color:
+                                FlutterFlowTheme.of(context).primaryBackground,
                             shape: BoxShape.rectangle,
                           ),
                           child: Container(

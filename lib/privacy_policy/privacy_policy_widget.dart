@@ -55,7 +55,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         automaticallyImplyLeading: false,
         leading: InkWell(
           splashColor: Colors.transparent,
@@ -67,13 +67,16 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
           },
           child: Icon(
             Icons.chevron_left_rounded,
-            color: FlutterFlowTheme.of(context).grayLight,
+            color: FlutterFlowTheme.of(context).accent1,
             size: 32.0,
           ),
         ),
         title: Text(
           'Privacy Policy',
-          style: FlutterFlowTheme.of(context).headlineSmall,
+          style: FlutterFlowTheme.of(context).headlineSmall.override(
+                fontFamily: 'Lexend',
+                color: FlutterFlowTheme.of(context).secondaryText,
+              ),
         ),
         actions: [],
         centerTitle: false,
@@ -108,7 +111,13 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                       Expanded(
                         child: Text(
                           'How we use your data',
-                          style: FlutterFlowTheme.of(context).displaySmall,
+                          style: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .override(
+                                fontFamily: 'Lexend',
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                              ),
                         ),
                       ),
                     ],
